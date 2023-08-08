@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\igor.afonso\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj": {}
+    "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj": {}
   },
   "projects": {
-    "C:\\Users\\igor.afonso\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj": {
+    "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\igor.afonso\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj",
+        "projectUniqueName": "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj",
         "projectName": "BackEndAplication",
-        "projectPath": "C:\\Users\\igor.afonso\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj",
-        "packagesPath": "C:\\Users\\igor.afonso\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\igor.afonso\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\obj\\",
+        "projectPath": "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj",
+        "packagesPath": "C:\\Users\\igor_adm\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\igor.afonso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\igor_adm\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -41,9 +41,29 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.21, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.32.1, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.32.1, )"
             }
           },
           "imports": [
@@ -65,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
