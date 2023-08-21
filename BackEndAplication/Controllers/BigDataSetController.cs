@@ -5,13 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BackEndAplication.Controllers
 {
-    [Route("/account/create")]
-    public class RegisterController : Controller
+    public class BigDataSetController : Controller
     {
         [HttpPost]
-        [Route("register")]
-        [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> Register([FromBody] Users model)
+        [Route("importData")]
+        [Authorize]
+        public async Task<ActionResult<dynamic>> ImportDataSet([FromBody] Users model)
         {
             var constructorNewUser = new CreateUserService();
             var user = await constructorNewUser.CreateUser(model.Username, model.Password, model.email);
@@ -24,6 +23,7 @@ namespace BackEndAplication.Controllers
             {
                 return Results.StatusCode(200).ToString();
             }
+                
         }
     }
 }
