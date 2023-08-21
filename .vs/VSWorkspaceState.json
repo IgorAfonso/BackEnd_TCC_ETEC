@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\BackEndAplication",
+    "\\BackEndAplication\\Controllers",
+    "\\BackEndAplication\\Repositories"
   ],
+  "SelectedNode": "\\BackEndAplication\\Repositories\\UserRepository.cs",
   "PreviewInSolutionExplorer": false
 }
