@@ -5,6 +5,6 @@
     "\\BackEndAplication\\Controllers",
     "\\BackEndAplication\\Repositories"
   ],
-  "SelectedNode": "\\BackEndAplication\\Repositories\\UserRepository.cs",
+  "SelectedNode": "\\BackEndAplication\\Controllers\\RegisterController.cs",
   "PreviewInSolutionExplorer": false
 }

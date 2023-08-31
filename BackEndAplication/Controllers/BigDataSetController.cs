@@ -10,20 +10,32 @@ namespace BackEndAplication.Controllers
         [HttpPost]
         [Route("importData")]
         [Authorize]
-        public async Task<ActionResult<dynamic>> ImportDataSet([FromBody] Users model)
+        public async Task<ActionResult<dynamic>> ImportDataSet([FromBody] bigDataModel model)
         {
-            var constructorNewUser = new CreateUserService();
-            var user = await constructorNewUser.CreateUser(model.Username, model.Password, model.email);
-
-            if (user == null)
+            var userAuthenticated = User.Identity.Name;
+            if(userAuthenticated == null)
             {
-                return BadRequest(new { message = "Não Foi possível Criar o usuário." });
+                var autFailResponse = "Falha ao encontrar usupario Authenticado.";
+                return BadRequest(autFailResponse);
             }
             else
             {
-                return Results.StatusCode(200).ToString();
+                var insertService = new ImportBigDataService();
+                var response = await insertService.InsertBigDataOnDataBase(userAuthenticated, model.CompleteName, model.BornDate,
+                    model.CPF, model.RG, model.Adress, model.Number, model.Neighborhood, model.TeachingInstitution,
+                    model.HaveBF, model.HaveCadUniq, model.CityTeachingInstitution, model.Period);
+
+                string failResponse = "Falha ao Importar Dados.";
+
+                if (response)
+                {
+                    return Results.StatusCode(200).ToString();
+                }
+                else
+                {
+                    return BadRequest(failResponse);
+                }
             }
-                
         }
     }
 }

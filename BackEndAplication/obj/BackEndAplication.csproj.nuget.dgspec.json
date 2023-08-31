@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\igor_adm\\Desktop\\APIRest\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj": {}
+    "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj": {}
   },
   "projects": {
-    "C:\\Users\\igor_adm\\Desktop\\APIRest\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj": {
+    "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\igor_adm\\Desktop\\APIRest\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj",
+        "projectUniqueName": "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj",
         "projectName": "BackEndAplication",
-        "projectPath": "C:\\Users\\igor_adm\\Desktop\\APIRest\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj",
+        "projectPath": "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj",
         "packagesPath": "C:\\Users\\igor_adm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\igor_adm\\Desktop\\APIRest\\BackEnd_TCC_ETEC\\BackEndAplication\\obj\\",
+        "outputPath": "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\igor_adm\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -48,6 +48,10 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.21, )"
+            },
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
