@@ -6,14 +6,12 @@ namespace BackEndAplication.Services
     {
         public async Task<string> CreateUser(string user, string password, string email) 
         {
-            var userJSON = user;
-            var passwordJSON = password;
-            var emailJSON = email;
-            var query = string.Format("SP_AESENCRYPT_USER_API({0}, {1}, {2}",
-                userJSON, passwordJSON, emailJSON);
+            var query = string.Format(
+                "INSERT INTO USERS (NAME, EMail, Password) VALUES ({0}, {1}, {2})",
+                user, email, password);
 
-            MySQLConnection executorQuery = new MySQLConnection();
-            string resultQuery = executorQuery.connectionDataBase(query);
+            MySQLConnection connection = new MySQLConnection();
+            var resultQuery = connection.connectionDataBase(query);
 
             return resultQuery;
         }

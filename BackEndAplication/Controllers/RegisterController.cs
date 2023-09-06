@@ -11,18 +11,44 @@ namespace BackEndAplication.Controllers
         [HttpPost]
         [Route("register")]
         [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> Register([FromBody] Users model)
+        public async Task<ActionResult<dynamic>> Register([FromBody] CreateUserModel model)
         {
+            
             var constructorNewUser = new CreateUserService();
-            var user = await constructorNewUser.CreateUser(model.Username, model.Password, model.email);
-
-            if (user == null)
+            try
             {
-                return BadRequest(new { message = "Não Foi possível Criar o usuário." });
+                var user = await constructorNewUser.CreateUser(model.Username, model.Password, model.email);
+                if(user != null)
+                {
+                    var response = new ResponseViewModel()
+                    {
+                        Data = DateTime.Now,
+                        Sucesso = true,
+                        Mensagem = "Sucesso ao cadastrar usuário."
+                    };
+                    return Json(response);
+                }
+                else
+                {
+                    var response = new ResponseViewModel()
+                    {
+                        Data = DateTime.Now,
+                        Sucesso = false,
+                        Mensagem = "Falha ao criar usuário."
+                    };
+                    return Json(response);
+                }
+                
             }
-            else
+            catch (Exception ex)
             {
-                return Results.StatusCode(200).ToString();
+                var response = new ResponseViewModel()
+                {
+                    Data = ex.Data,
+                    Sucesso = false,
+                    Mensagem = ex.Message
+                };
+                return Json(response);
             }
         }
     }

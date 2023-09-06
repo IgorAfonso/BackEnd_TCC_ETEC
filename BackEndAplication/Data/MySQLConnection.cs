@@ -11,10 +11,10 @@ namespace BackEndAplication.Data
         {
 
             var AppName = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            string dataBaseName = AppName.GetSection("DataBase")["dataBaseName"];
-            string server = AppName.GetSection("DataBase")["Server"];
-            string user = AppName.GetSection("DataBase")["User"];
-            string password = AppName.GetSection("DataBase")["Password"];
+            string dataBaseName = "fastcarddb"; //AppName.GetSection("DataBase")["dataBaseName"];
+            string server = "localhost"; //AppName.GetSection("DataBase")["Server"];
+            string user = "database"; //AppName.GetSection("DataBase")["User"];
+            string password = "Igor6985";  //AppName.GetSection("DataBase")["Password"];
 
             string connectionString = string.Format("server={0};database={1};uid={2};password={3}",
                 server, dataBaseName, user, password);
@@ -37,6 +37,10 @@ namespace BackEndAplication.Data
             catch (Exception e)
             {
                 return e.Message;
+            }
+            finally
+            {
+                mConn.Close();
             }
         }
     }
