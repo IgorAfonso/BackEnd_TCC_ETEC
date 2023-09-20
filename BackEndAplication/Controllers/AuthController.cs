@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using BackEndAplication.Models;
-using BackEndAplication.Repositories;
 using BackEndAplication.Services;
 
 namespace BackEndAplication.Controllers
@@ -12,19 +11,22 @@ namespace BackEndAplication.Controllers
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> Authenticate([FromBody] Users model)
+        public async Task<ActionResult<dynamic>> Authenticate([FromBody] UserLogin model)
         {
-            var user = UserRepository.Get(model.Username, model.Password);
+            var connectionDatabase = new Data.MySQLConnectionWithValue();
+            var user = connectionDatabase.ConsultUser(string.Format("SELECT ID, username, Password, email " +
+                "FROM USERS WHERE username = '{0}' AND Password = '{1}' LIMIT 1", model.UserName, model.Password));
 
-            if (user == null)
+            //var user = UserRepository.Get(model.Username, model.Password);
+
+            if (string.IsNullOrEmpty(user.ToString()))
                 return NotFound(new { message = "Usuário ou senha inválidos" });
 
-            var token = TokenService.GenerateToken(user);
-            user.Password = "";
-            return new
+            string token = TokenService.GenerateToken(user.ToString());
+            //model.Password = "";
+            return new Models.ReturnLoginModel
             {
-                user = user,
-                token = token
+                Token = token.ToString()
             };
         }
     }

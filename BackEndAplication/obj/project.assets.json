@@ -3654,19 +3654,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\igor_adm\\.nuget\\packages\\": {}
+    "C:\\Users\\Igor Henrique Afonso\\.nuget\\packages\\": {},
+    "E:\\Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj",
+      "projectUniqueName": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEnd_ETEC\\API\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj",
       "projectName": "BackEndAplication",
-      "projectPath": "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj",
-      "packagesPath": "C:\\Users\\igor_adm\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\igor_adm\\Desktop\\BackEnd\\BackEnd_TCC_ETEC\\BackEndAplication\\obj\\",
+      "projectPath": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEnd_ETEC\\API\\BackEnd_TCC_ETEC\\BackEndAplication\\BackEndAplication.csproj",
+      "packagesPath": "C:\\Users\\Igor Henrique Afonso\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEnd_ETEC\\API\\BackEnd_TCC_ETEC\\BackEndAplication\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "E:\\Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\igor_adm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Igor Henrique Afonso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3674,6 +3679,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },

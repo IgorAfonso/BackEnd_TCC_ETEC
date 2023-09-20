@@ -7,17 +7,20 @@ namespace BackEndAplication.Data
 { 
     public class MySQLConnection
     {
+        private string _dataBaseSchema;
+        private string _server;
+        private string user;
+        private string password;
+
         public string connectionDataBase(string command)
         {
+            _dataBaseSchema = Models.Configuration.GetSectionValue("MySqlServer", "DataBase");
+            _server = Models.Configuration.GetSectionValue("MySqlServer", "Server");
+            user = Models.Configuration.GetSectionValue("MySqlServer", "User");
+            password = Models.Configuration.GetSectionValue("MySqlServer", "Password");
 
-            var AppName = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            string dataBaseName = "fastcarddb"; //AppName.GetSection("DataBase")["dataBaseName"];
-            string server = "localhost"; //AppName.GetSection("DataBase")["Server"];
-            string user = "database"; //AppName.GetSection("DataBase")["User"];
-            string password = "Igor6985";  //AppName.GetSection("DataBase")["Password"];
-
-            string connectionString = string.Format("server={0};database={1};uid={2};password={3}",
-                server, dataBaseName, user, password);
+            string connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
+                _server, _dataBaseSchema, user, password);
 
             var mConn = new MySqlConnection(connectionString);
 
