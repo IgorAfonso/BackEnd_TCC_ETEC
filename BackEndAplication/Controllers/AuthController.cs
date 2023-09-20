@@ -59,7 +59,7 @@ namespace BackEndAplication.Controllers
                 var user = await constructorNewUser.CreateUser(model.Username, model.Password, model.email);
                 if (user != null)
                 {
-                    var response = new ResponseViewModel()
+                    var response = new SimplifiedResponseViewModel()
                     {
                         Data = DateTime.Now,
                         Mensagem = user
@@ -68,10 +68,9 @@ namespace BackEndAplication.Controllers
                 }
                 else
                 {
-                    var response = new ResponseViewModel()
+                    var response = new SimplifiedResponseViewModel()
                     {
                         Data = DateTime.Now,
-                        Sucesso = false,
                         Mensagem = "Falha ao criar usuário."
                     };
                     return Json(response);
@@ -88,6 +87,34 @@ namespace BackEndAplication.Controllers
                 };
                 return Json(response);
             }
+        }
+
+        //ENDPOINT - Recuperação de Senha
+        [HttpPost]
+        [Route("/recovery")]
+        [AllowAnonymous]
+        public async Task<ActionResult<dynamic>> PasswordRecover([FromBody] UserLogin model)
+        {
+            string message = "";
+            var objectRecovery = new RecoverPasswordServicecs();
+            var result = await objectRecovery.RecoverPassword(model.UserName, model.Password);
+
+            if (string.IsNullOrEmpty(result))
+            {
+                message = "Não Foi Possível Recuperar a senha";
+            }
+            else
+            {
+                message = result;
+            }
+
+            var response = new SimplifiedResponseViewModel()
+            {
+                Data = DateTime.Now,
+                Mensagem = message
+            };
+
+            return Json(response);
         }
     }
 }
