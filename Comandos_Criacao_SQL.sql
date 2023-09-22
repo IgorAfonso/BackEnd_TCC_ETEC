@@ -11,3 +11,28 @@ CREATE TABLE users(
 
 SELECT * FROM users;
 INSERT INTO users (username, Password, email) VALUES ('igor.afonso', '123456', 'igor.teste@yahoo.com');
+
+CREATE TABLE operations(
+	IDUser INT PRIMARY KEY NOT NULL,
+	CompleteName VARCHAR(100),
+	OperationDate DATETIME,
+	BornDate DATE,
+	CPF VARCHAR(15),
+	RG VARCHAR(20),
+	TeachingInstitution VARCHAR(100),
+	HaveBF CHAR(1),
+	HaveCadUniq CHAR(1),
+	CityTeachingInstitutin VARCHAR(100),
+	Period VARCHAR(50)
+);
+
+SELECT * FROM operations;
+
+CREATE TABLE adress(
+	IDUser INT PRIMARY KEY NOT NULL,
+	Adress VARCHAR(100),
+	Number VARCHAR(10),
+	Neightborhood VARCHAR(100)
+);
+
+SELECT * FROM adress;
