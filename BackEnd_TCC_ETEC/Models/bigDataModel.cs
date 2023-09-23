@@ -4,6 +4,7 @@
     {
         public string user { get; set; }
         public string CompleteName { get; set; }
+        public string OperationDate { get; set; }
         public string BornDate { get; set; }
         public string CPF { get; set; }
         public string RG { get; set; }

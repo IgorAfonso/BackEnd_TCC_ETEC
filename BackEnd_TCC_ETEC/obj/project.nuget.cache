@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gFfAY30aFz/dCHx//KJt3JsjVI4vVlGJvZDVdwu8UIuXLyH8n359eFQp07mTe+wZiN1Jz+YkKQlNUeWWV/hqFA==",
+  "dgSpecHash": "C5rL1oSvWbD0wIldfV6g85rfiCN+Zs802ETTmbh1XnBgCMECkXU+BEl4CBAFZfdsTDBNOvaAx14UJ3vy1Qvj0Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEndTCCNewVerion\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
+  "projectFilePath": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEnd_ETEC\\API\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Igor Henrique Afonso\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
     "C:\\Users\\Igor Henrique Afonso\\.nuget\\packages\\k4os.compression.lz4\\1.3.5\\k4os.compression.lz4.1.3.5.nupkg.sha512",

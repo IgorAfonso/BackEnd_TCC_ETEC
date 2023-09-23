@@ -13,7 +13,7 @@ SELECT * FROM users;
 INSERT INTO users (username, Password, email) VALUES ('igor.afonso', '123456', 'igor.teste@yahoo.com');
 
 CREATE TABLE operations(
-	IDUser INT PRIMARY KEY NOT NULL,
+	IDUser INT NOT NULL,
 	CompleteName VARCHAR(100),
 	OperationDate DATETIME,
 	BornDate DATE,
@@ -23,16 +23,17 @@ CREATE TABLE operations(
 	HaveBF CHAR(1),
 	HaveCadUniq CHAR(1),
 	CityTeachingInstitutin VARCHAR(100),
-	Period VARCHAR(50)
+	Period VARCHAR(50) PRIMARY KEY
 );
 
 SELECT * FROM operations;
 
 CREATE TABLE adress(
-	IDUser INT PRIMARY KEY NOT NULL,
+	IDUser INT NOT NULL,
 	Adress VARCHAR(100),
 	Number VARCHAR(10),
-	Neightborhood VARCHAR(100)
+	Neightborhood VARCHAR(100),
+	Period VARCHAR(50) PRIMARY KEY
 );
 
 SELECT * FROM adress;

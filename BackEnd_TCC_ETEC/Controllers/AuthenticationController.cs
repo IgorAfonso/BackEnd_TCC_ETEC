@@ -1,4 +1,5 @@
 ﻿using BackEnd_TCC_ETEC.Services;
+using BackEndAplication.Data;
 using BackEndAplication.Models;
 using BackEndAplication.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -14,13 +15,25 @@ namespace BackEnd_TCC_ETEC.Controllers
         [Route("/login")]
         public IActionResult Auth(string username, string password)
         {
-            if (username == "igor.afonso" && password == "123456")
+            var mConn = new MySQLConnectionWithValue();
+            var query = string.Format("SELECT users.username, users.Password FROM users WHERE users.username = '{0}'", username);
+            var UserDB = mConn.ConsultUser(query);
+
+            if (string.IsNullOrEmpty(UserDB.ToString()))
+                return BadRequest("Usuário não existente");
+
+
+            var userAndPass = mConn.TrueUser(query, username, password).Result;
+
+            if (userAndPass)
             {
                 var token = TokenService.GenerateToken(username);
                 return Ok(token);
             }
-
-            return BadRequest("Usuário ou senha Inválido");
+            else
+            {
+                return BadRequest("Usuário ou senha Inválido");
+            }
         }
 
         // ENDPOINT - Criar Usuário
@@ -49,7 +62,6 @@ namespace BackEnd_TCC_ETEC.Controllers
                         Mensagem = "Falha ao criar usuário."
                     };
                 }
-
             }
             catch (Exception ex)
             {
@@ -63,7 +75,7 @@ namespace BackEnd_TCC_ETEC.Controllers
         }
 
         //ENDPOINT - Recuperação de Senha
-        [HttpPost]
+        [HttpPut]
         [Route("/recovery")]
         public async Task<ActionResult<dynamic>> PasswordRecover([FromBody] UserLogin model)
         {

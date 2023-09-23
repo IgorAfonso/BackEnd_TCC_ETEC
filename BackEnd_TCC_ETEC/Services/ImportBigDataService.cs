@@ -14,7 +14,7 @@ namespace BackEndAplication.Services
             var dataBaseCon = new MySQLConnectionWithValue();
 
             var authentiatedUserQuery = string.Format("SELECT ID FROM users WHERE users.username = '{0}'", AuthenticatedUser);
-            var idUser = dataBaseCon.ValidarExistingUser(authentiatedUserQuery);
+            var idUser = dataBaseCon.ValidateExistingUser(authentiatedUserQuery);
 
             if (string.IsNullOrEmpty(idUser.Result))
                 return false;

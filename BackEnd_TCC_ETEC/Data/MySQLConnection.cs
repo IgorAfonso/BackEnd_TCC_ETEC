@@ -30,7 +30,8 @@ namespace BackEndAplication.Data
                 try
                 {
                     MySqlCommand commandExecution = new MySqlCommand(command, mConn);
-                    return commandExecution.ExecuteNonQuery().ToString();
+                    var result = commandExecution.ExecuteNonQuery().ToString();
+                    return result;
                 }
                 catch (Exception e)
                 {

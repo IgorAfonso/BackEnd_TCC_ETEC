@@ -14,7 +14,7 @@ namespace BackEndAplication.Services
                 user, email, password);
 
             var connection = new MySQLConnectionWithValue();
-            var resultQuery = connection.ValidarExistingUser(validatorQuery);
+            var resultQuery = connection.ValidateExistingUser(validatorQuery);
 
             if (resultQuery.Result == "" || resultQuery.Result != null)
                 return "Usuário já existe";

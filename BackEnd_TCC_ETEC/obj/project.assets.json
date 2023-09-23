@@ -2646,11 +2646,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEndTCCNewVerion\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
+      "projectUniqueName": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEnd_ETEC\\API\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
       "projectName": "BackEnd_TCC_ETEC",
-      "projectPath": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEndTCCNewVerion\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
+      "projectPath": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEnd_ETEC\\API\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
       "packagesPath": "C:\\Users\\Igor Henrique Afonso\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEndTCCNewVerion\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\obj\\",
+      "outputPath": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEnd_ETEC\\API\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "E:\\Visual Studio\\Shared\\NuGetPackages"

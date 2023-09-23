@@ -13,7 +13,7 @@ namespace BackEndAplication.Services
                 "WHERE users.username = '{1}'", password, username);
 
             var connectionToCreate = new MySQLConnectionWithValue();
-            var getIdProcess = connectionToCreate.ValidarExistingUser(getId);
+            var getIdProcess = connectionToCreate.ValidateExistingUser(getId);
 
             if (string.IsNullOrEmpty(getIdProcess.Result))
             {
@@ -21,7 +21,7 @@ namespace BackEndAplication.Services
             }
             else
             {
-                var finalResult = connectionToCreate.ValidarExistingUser(recoveryQuery).ToString();
+                var finalResult = connectionToCreate.ValidateExistingUser(recoveryQuery).ToString();
                 if (string.IsNullOrEmpty(finalResult))
                 {
                     return "Falha ao alterar a senha.";
