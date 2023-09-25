@@ -13,21 +13,24 @@ namespace BackEnd_TCC_ETEC.Controllers
         // ENDPOINT - Login
         [HttpPost]
         [Route("/login")]
-        public IActionResult Auth(string username, string password)
+        public IActionResult Auth([FromBody] UserLogin model)
         {
+            var hashService = new HashGenerator();
+            var hashedPassword = hashService.HashCreator(model.Password);
+
             var mConn = new MySQLConnectionWithValue();
-            var query = string.Format("SELECT users.username, users.Password FROM users WHERE users.username = '{0}'", username);
+            var query = string.Format("SELECT users.username, users.Password FROM users WHERE users.username = '{0}'", model.UserName);
             var UserDB = mConn.ConsultUser(query);
 
             if (string.IsNullOrEmpty(UserDB.ToString()))
                 return BadRequest("Usuário não existente");
 
 
-            var userAndPass = mConn.TrueUser(query, username, password).Result;
+            var userAndPass = mConn.TrueUser(query, model.UserName, hashedPassword).Result;
 
             if (userAndPass)
             {
-                var token = TokenService.GenerateToken(username);
+                var token = TokenService.GenerateToken(model.UserName);
                 return Ok(token);
             }
             else
@@ -41,11 +44,13 @@ namespace BackEnd_TCC_ETEC.Controllers
         [Route("/register")]
         public async Task<ActionResult<dynamic>> Register([FromBody] CreateUserModel model)
         {
+            var hashService = new HashGenerator();
+            var hashedPassword = hashService.HashCreator(model.Password);
 
             var constructorNewUser = new CreateUserService();
             try
             {
-                var user = await constructorNewUser.CreateUser(model.Username, model.Password, model.email);
+                var user = await constructorNewUser.CreateUser(model.Username, hashedPassword, model.email);
                 if (user != null)
                 {
                     return new SimplifiedResponseViewModel()
@@ -79,9 +84,12 @@ namespace BackEnd_TCC_ETEC.Controllers
         [Route("/recovery")]
         public async Task<ActionResult<dynamic>> PasswordRecover([FromBody] UserLogin model)
         {
+            var hashService = new HashGenerator();
+            var hashedPassword = hashService.HashCreator(model.Password);
+
             string message = "";
             var objectRecovery = new RecoverPasswordServicecs();
-            var result = await objectRecovery.RecoverPassword(model.UserName, model.Password);
+            var result = await objectRecovery.RecoverPassword(model.UserName, hashedPassword);
 
             if (string.IsNullOrEmpty(result))
             {

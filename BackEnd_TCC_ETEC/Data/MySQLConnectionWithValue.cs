@@ -304,7 +304,7 @@ namespace BackEndAplication.Data
             }
         }
 
-        public async Task<List<bigDataModel>> ConsultUserDocuments(string query)
+        public async Task<List<BigDataModel>> ConsultUserDocuments(string query)
         {
             _dataBaseSchema = Models.Configuration.GetSectionValue("MySqlServer", "DataBase");
             _server = Models.Configuration.GetSectionValue("MySqlServer", "Server");
@@ -318,7 +318,7 @@ namespace BackEndAplication.Data
 
             try
             {
-                var list = new List<bigDataModel>();
+                var list = new List<BigDataModel>();
                 try
                 {
                     mConn.Open();
@@ -326,10 +326,10 @@ namespace BackEndAplication.Data
                     {
                         using (MySqlDataReader reader = commandExecution.ExecuteReader())
                         {
-                            bigDataModel userModel;
+                            BigDataModel userModel;
                             while (reader.Read())
                             {
-                                userModel = new bigDataModel();
+                                userModel = new BigDataModel();
                                 userModel.user = reader[0].ToString();
                                 userModel.CompleteName = reader[1].ToString();
                                 userModel.OperationDate = reader[2].ToString();
@@ -351,8 +351,8 @@ namespace BackEndAplication.Data
                 catch (Exception)
                 {
                     list.Clear();
-                    bigDataModel userModel;
-                    userModel = new bigDataModel();
+                    BigDataModel userModel;
+                    userModel = new BigDataModel();
                     userModel.user = "";
                     userModel.CompleteName = "";
                     userModel.OperationDate = "";
@@ -376,9 +376,9 @@ namespace BackEndAplication.Data
             }
             catch (Exception)
             {
-                var list = new List<bigDataModel>();
-                bigDataModel userModel;
-                userModel = new bigDataModel();
+                var list = new List<BigDataModel>();
+                BigDataModel userModel;
+                userModel = new BigDataModel();
                 userModel.user = "";
                 userModel.CompleteName = "";
                 userModel.OperationDate = "";
