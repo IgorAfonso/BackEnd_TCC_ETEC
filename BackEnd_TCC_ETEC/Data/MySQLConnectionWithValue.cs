@@ -8,16 +8,12 @@ namespace BackEndAplication.Data
 {
     public class MySQLConnectionWithValue
     {
-        private string _dataBaseSchema;
-        private string _server;
-        private string user;
-        private string password;
+        private readonly string _dataBaseSchema = Models.Configuration.GetSectionValue("MySqlServer", "DataBase");
+        private readonly string _server = Models.Configuration.GetSectionValue("MySqlServer", "Server");
+        private readonly string user = Models.Configuration.GetSectionValue("MySqlServer", "User");
+        private readonly string password = Models.Configuration.GetSectionValue("MySqlServer", "Password");
         public async Task<string> ConsultUser(string query)
         {
-            _dataBaseSchema = Models.Configuration.GetSectionValue("MySqlServer", "DataBase");
-            _server = Models.Configuration.GetSectionValue("MySqlServer", "Server");
-            user = Models.Configuration.GetSectionValue("MySqlServer", "User");
-            password = Models.Configuration.GetSectionValue("MySqlServer", "Password");
 
             string connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
                 _server, _dataBaseSchema, user, password);
@@ -65,11 +61,6 @@ namespace BackEndAplication.Data
 
         public async Task<string> ValidateExistingUser(string query)
         {
-            _dataBaseSchema = Models.Configuration.GetSectionValue("MySqlServer", "DataBase");
-            _server = Models.Configuration.GetSectionValue("MySqlServer", "Server");
-            user = Models.Configuration.GetSectionValue("MySqlServer", "User");
-            password = Models.Configuration.GetSectionValue("MySqlServer", "Password");
-
             string connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
                 _server, _dataBaseSchema, user, password);
 
@@ -122,11 +113,6 @@ namespace BackEndAplication.Data
 
         public async Task<string> ValidatePeriod(string query)
         {
-            _dataBaseSchema = Models.Configuration.GetSectionValue("MySqlServer", "DataBase");
-            _server = Models.Configuration.GetSectionValue("MySqlServer", "Server");
-            user = Models.Configuration.GetSectionValue("MySqlServer", "User");
-            password = Models.Configuration.GetSectionValue("MySqlServer", "Password");
-
             string connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
                 _server, _dataBaseSchema, user, password);
 
@@ -179,11 +165,6 @@ namespace BackEndAplication.Data
 
         public async Task<bool> TrueUser(string query, string username, string Password)
         {
-            _dataBaseSchema = Models.Configuration.GetSectionValue("MySqlServer", "DataBase");
-            _server = Models.Configuration.GetSectionValue("MySqlServer", "Server");
-            user = Models.Configuration.GetSectionValue("MySqlServer", "User");
-            password = Models.Configuration.GetSectionValue("MySqlServer", "Password");
-
             string connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
                 _server, _dataBaseSchema, user, password);
 
@@ -234,11 +215,6 @@ namespace BackEndAplication.Data
 
         public async Task<List<Users>> ConsultUserAllInformation(string query)
         {
-            _dataBaseSchema = Models.Configuration.GetSectionValue("MySqlServer", "DataBase");
-            _server = Models.Configuration.GetSectionValue("MySqlServer", "Server");
-            user = Models.Configuration.GetSectionValue("MySqlServer", "User");
-            password = Models.Configuration.GetSectionValue("MySqlServer", "Password");
-
             string connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
                 _server, _dataBaseSchema, user, password);
 
@@ -306,11 +282,6 @@ namespace BackEndAplication.Data
 
         public async Task<List<BigDataModel>> ConsultUserDocuments(string query)
         {
-            _dataBaseSchema = Models.Configuration.GetSectionValue("MySqlServer", "DataBase");
-            _server = Models.Configuration.GetSectionValue("MySqlServer", "Server");
-            user = Models.Configuration.GetSectionValue("MySqlServer", "User");
-            password = Models.Configuration.GetSectionValue("MySqlServer", "Password");
-
             string connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
                 _server, _dataBaseSchema, user, password);
 
@@ -399,11 +370,6 @@ namespace BackEndAplication.Data
 
         public async Task<List<CardModel>> GetUserCard(string query)
         {
-            _dataBaseSchema = Models.Configuration.GetSectionValue("MySqlServer", "DataBase");
-            _server = Models.Configuration.GetSectionValue("MySqlServer", "Server");
-            user = Models.Configuration.GetSectionValue("MySqlServer", "User");
-            password = Models.Configuration.GetSectionValue("MySqlServer", "Password");
-
             string connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
                 _server, _dataBaseSchema, user, password);
 
