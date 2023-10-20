@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEnd_ETEC\\API\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj": {}
+    "C:\\Users\\igor.afonso\\Desktop\\APITCC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEnd_ETEC\\API\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj": {
+    "C:\\Users\\igor.afonso\\Desktop\\APITCC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEnd_ETEC\\API\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
+        "projectUniqueName": "C:\\Users\\igor.afonso\\Desktop\\APITCC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
         "projectName": "BackEnd_TCC_ETEC",
-        "projectPath": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEnd_ETEC\\API\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
-        "packagesPath": "C:\\Users\\Igor Henrique Afonso\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Igor Henrique Afonso\\Desktop\\BackEnd_ETEC\\API\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\obj\\",
+        "projectPath": "C:\\Users\\igor.afonso\\Desktop\\APITCC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
+        "packagesPath": "C:\\Users\\igor.afonso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\igor.afonso\\Desktop\\APITCC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "E:\\Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Igor Henrique Afonso\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\igor.afonso\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,8 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -82,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
