@@ -1,20 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\igor.afonso\\Desktop\\APITCC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj": {}
+    "C:\\clone\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\igor.afonso\\Desktop\\APITCC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj": {
+    "C:\\clone\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\igor.afonso\\Desktop\\APITCC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
+        "projectUniqueName": "C:\\clone\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
         "projectName": "BackEnd_TCC_ETEC",
-        "projectPath": "C:\\Users\\igor.afonso\\Desktop\\APITCC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
-        "packagesPath": "C:\\Users\\igor.afonso\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\igor.afonso\\Desktop\\APITCC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\obj\\",
+        "projectPath": "C:\\clone\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC.csproj",
+        "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
+        "outputPath": "C:\\clone\\BackEnd_TCC_ETEC\\BackEnd_TCC_ETEC\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\igor.afonso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -76,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

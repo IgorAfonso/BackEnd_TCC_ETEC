@@ -434,5 +434,58 @@ namespace BackEndAplication.Data
                 return list;
             }
         }
+
+        public async Task<List<string>> GetAllUsers(string query)
+        {
+            string connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
+                _server, _dataBaseSchema, user, password);
+
+            var mConn = new MySqlConnection(connectionString);
+
+            try
+            {
+                var list = new List<string>();
+                try
+                {
+                    mConn.Open();
+                    await using (MySqlCommand commandExecution = new MySqlCommand(query, mConn))
+                    {
+                        using (MySqlDataReader reader = commandExecution.ExecuteReader())
+                        {
+                            string user;
+                            int conter = 0;
+                            while (reader.Read())
+                            {
+                                user = reader[conter].ToString();
+                                conter++;
+                                list.Add(user);
+                            }
+                        }
+                    }
+                    return list;
+                }
+                catch (Exception)
+                {
+                    var user = string.Empty;
+                    list.Clear();
+                    user = "";
+                    list.Add(user);
+                    return list;
+                }
+                finally
+                {
+                    mConn.Close();
+                }
+            }
+            catch (Exception)
+            {
+                var list = new List<string>;
+                var user = string.Empty;
+                list.Clear();
+                user = "";
+                list.Add(user);
+                return list;
+            }
+
+        }
     }
-}
