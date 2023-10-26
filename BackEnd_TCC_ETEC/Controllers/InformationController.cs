@@ -71,14 +71,17 @@ namespace BackEnd_TCC_ETEC.Controllers
 
         [HttpGet]
         [Route("/GetAllUsers")]
-        public async Task<List<string>> GetAllUsers()
+        public async Task<object> GetAllUsers()
         {
-            var query = "SELECT username FROM users";
+            var query = "SELECT username, email FROM users";
 
             var myConn = new MySQLConnectionWithValue();
-            var listUser = await myConn.GetAllUsers(query);
+            var listUser =  myConn.GetAllUsers(query);
 
-            return listUser;
+            return new
+            {
+                User = listUser.Result,
+            };
         }
     }
 }

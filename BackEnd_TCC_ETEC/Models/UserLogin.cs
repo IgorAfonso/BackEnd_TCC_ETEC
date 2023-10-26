@@ -18,9 +18,9 @@
         public string UserName { get; set; }
     }
 
-    public class UserVerificarionModelDocuments
+    public class UserVerificarionModelReturnUsers
     {
         public string UserName { get; set; }
-        public string Period { get; set; }
+        public string Email { get; set; }
     }
 }

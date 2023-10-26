@@ -87,7 +87,7 @@ namespace BackEndAplication.Data
                         }
                     }
                     var result = list[0].Id;
-                    if(result == 0)
+                    if (result == 0)
                     {
                         return null;
                     }
@@ -435,7 +435,7 @@ namespace BackEndAplication.Data
             }
         }
 
-        public async Task<List<string>> GetAllUsers(string query)
+        public async Task<List<UserVerificarionModelReturnUsers>> GetAllUsers(string query)
         {
             string connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
                 _server, _dataBaseSchema, user, password);
@@ -444,7 +444,7 @@ namespace BackEndAplication.Data
 
             try
             {
-                var list = new List<string>();
+                var list = new List<UserVerificarionModelReturnUsers>();
                 try
                 {
                     mConn.Open();
@@ -452,24 +452,25 @@ namespace BackEndAplication.Data
                     {
                         using (MySqlDataReader reader = commandExecution.ExecuteReader())
                         {
-                            string user;
-                            int conter = 0;
+                            
+                        
                             while (reader.Read())
                             {
-                                user = reader[conter].ToString();
-                                conter++;
-                                list.Add(user);
+                                var userModel = new UserVerificarionModelReturnUsers();
+                                userModel.UserName = reader[0].ToString();
+                                userModel.Email = reader[1].ToString();
+                                list.Add(userModel);
                             }
                         }
                     }
                     return list;
                 }
                 catch (Exception)
-                {
-                    var user = string.Empty;
+                {                    
                     list.Clear();
-                    user = "";
-                    list.Add(user);
+                    var userModel = new UserVerificarionModelReturnUsers();
+                    userModel.UserName = "";
+                    list.Add(userModel);
                     return list;
                 }
                 finally
@@ -479,13 +480,12 @@ namespace BackEndAplication.Data
             }
             catch (Exception)
             {
-                var list = new List<string>;
-                var user = string.Empty;
-                list.Clear();
-                user = "";
-                list.Add(user);
+                var list = new List<UserVerificarionModelReturnUsers>();              
+                var userModel = new UserVerificarionModelReturnUsers();
+                userModel.UserName = "";
+                list.Add(userModel);
                 return list;
             }
-
         }
     }
+}
