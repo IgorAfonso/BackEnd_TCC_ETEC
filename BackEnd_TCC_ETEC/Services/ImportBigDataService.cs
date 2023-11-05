@@ -1,12 +1,13 @@
 ﻿using BackEndAplication.Data;
 using BackEndAplication.Models;
 using System.Globalization;
+using Serilog;
 
 namespace BackEndAplication.Services
 {
     public class ImportBigDataService
     {
-        public async Task<Boolean> InsertBigDataOnDataBase(string AuthenticatedUser, string CompleteName, 
+        public async Task<String> InsertBigDataOnDataBase(string AuthenticatedUser, string CompleteName, 
             string BornDate, string CPF, string RG, string Adress, string Number, string Neighborhood, 
             string TeachingInstitution, string HaveBF, string HaveCadUniq,
             string CityTeachingInstitution, string Period)
@@ -16,14 +17,14 @@ namespace BackEndAplication.Services
             var authentiatedUserQuery = string.Format("SELECT ID FROM users WHERE users.username = '{0}'", AuthenticatedUser);
             var idUser = dataBaseCon.ValidateExistingUser(authentiatedUserQuery);
 
-            if (string.IsNullOrEmpty(idUser.Result))
-                return false;
+            if (idUser.Result == "userNotFound")
+                return "UserNotFound";
 
             var validationPeriod = string.Format("SELECT Period FROM operations WHERE operations.IDUser = {0} ORDER BY operations.OperationDate DESC", idUser.Result);
             var periodUser = dataBaseCon.ValidatePeriod(validationPeriod);
 
             if(periodUser.Result == Period)
-                return false;
+                return "PeriodExists";
 
             var insertAuthenticatedUserOperations = string.Format("INSERT INTO operations (IDUser, CompleteName, " +
                 "OperationDate, BornDate, CPF, RG, TeachingInstitution,HaveBF, HaveCadUniq, CityTeachingInstitutin, " +
@@ -39,14 +40,15 @@ namespace BackEndAplication.Services
                 var resultOperation = dataInsert.connectionDataBase(insertAuthenticatedUserOperations).ToString();
                 var resultAdress = dataInsert.connectionDataBase(insertAuthenticatedUserAdress).ToString();
 
-                if (resultOperation == "0") return false;
-                if (resultAdress == "0") return false;
+                if (resultOperation == "DatabaseFailure") return "DatabaseFailure";
+                if (resultAdress == "DatabaseFailure") return "DatabaseFailure";
 
-                return true;
+                return "Sucssess";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                Log.Error(string.Format("Serviço de importação falhou pelo seguinte motivo: {0}", ex.Message));
+                return ex.Message;
             }
         }
     }

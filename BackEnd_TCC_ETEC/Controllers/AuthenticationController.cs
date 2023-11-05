@@ -3,6 +3,7 @@ using BackEndAplication.Data;
 using BackEndAplication.Models;
 using BackEndAplication.Services;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace BackEnd_TCC_ETEC.Controllers
 {
@@ -23,18 +24,25 @@ namespace BackEnd_TCC_ETEC.Controllers
             var UserDB = mConn.ConsultUser(query);
 
             if (string.IsNullOrEmpty(UserDB.ToString()))
+            {
+                Log.Error(string.Format("[HttpPost] Usuário {0} não existe nos registros.", model.UserName));
                 return BadRequest("Usuário não existente");
+            }
+                
 
 
             var userAndPass = mConn.TrueUser(query, model.UserName, hashedPassword).Result;
 
             if (userAndPass)
             {
+                Log.Information(string.Format("[HttpPost] Usuário {0} autenticado com sucesso!", model.UserName));
                 var token = TokenService.GenerateToken(model.UserName);
+                Log.Information(string.Format("[HttpPost] Token Gerado para o usuário: {0}", model.UserName));
                 return Ok(token);
             }
             else
             {
+                Log.Error(string.Format("[HttpPost] Usuário ou senha Inválido.{0}", model.UserName));
                 return BadRequest("Usuário ou senha Inválido");
             }
         }
@@ -53,6 +61,7 @@ namespace BackEnd_TCC_ETEC.Controllers
                 var user = await constructorNewUser.CreateUser(model.Username, hashedPassword, model.email);
                 if (user != null)
                 {
+                    Log.Information(string.Format("[HttpPost] Usuário {0} criado com sucesso!", model.Username));
                     return new SimplifiedResponseViewModel()
                     {
                         Data = DateTime.Now,
@@ -61,6 +70,7 @@ namespace BackEnd_TCC_ETEC.Controllers
                 }
                 else
                 {
+                    Log.Error(string.Format("[HttpPost] Falha na criação do usuário: {0}", model.Username));
                     return new SimplifiedResponseViewModel()
                     {
                         Data = DateTime.Now,
@@ -70,6 +80,7 @@ namespace BackEnd_TCC_ETEC.Controllers
             }
             catch (Exception ex)
             {
+                Log.Error(string.Format("[HttpPost] Erro ao criar usuário Exception: {0}", ex.Message));
                 return new ResponseViewModel()
                 {
                     Data = ex.Data,
@@ -93,10 +104,12 @@ namespace BackEnd_TCC_ETEC.Controllers
 
             if (string.IsNullOrEmpty(result))
             {
+                Log.Error(string.Format("[HttpPut] Não Foi possível recuperar a senha para o usuário: {0}", model.UserName));
                 message = "Não Foi Possível Recuperar a senha";
             }
             else
             {
+                Log.Information(string.Format("[HttpPut] Senha recuperada com sucesso para o usuário {0}", model.UserName));
                 message = result;
             }
 

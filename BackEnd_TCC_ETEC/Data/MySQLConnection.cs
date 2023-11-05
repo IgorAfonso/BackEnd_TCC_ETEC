@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System.Data;
 using static Org.BouncyCastle.Math.EC.ECCurve;
+using Serilog;
 
 namespace BackEndAplication.Data
 { 
@@ -25,16 +26,19 @@ namespace BackEndAplication.Data
                 try
                 {
                     MySqlCommand commandExecution = new MySqlCommand(command, mConn);
+                    Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
                     var result = commandExecution.ExecuteNonQuery().ToString();
                     return result;
                 }
                 catch (Exception e)
                 {
+                    Log.Error(string.Format("[Consulta ao MySql] Erro ao realizar consulta: {0}", e.Message));
                     return e.Message;
                 }
             }
             catch (Exception e)
             {
+                Log.Error(string.Format("[Consulta ao MySql] Erro ao realizar consulta: {0}", e.Message));
                 return e.Message;
             }
             finally

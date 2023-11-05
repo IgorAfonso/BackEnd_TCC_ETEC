@@ -2,6 +2,7 @@
 using BackEndAplication.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace BackEnd_TCC_ETEC.Controllers
 {
@@ -18,6 +19,7 @@ namespace BackEnd_TCC_ETEC.Controllers
 
             var listInfos = myConn.ConsultUserAllInformation(query);
 
+            Log.Information("[HttpGet] GetUserInformation realizado para o usuário {0}", username);
             return new
             {
                 Usuario = listInfos.Result,
@@ -34,12 +36,17 @@ namespace BackEnd_TCC_ETEC.Controllers
             var idUser = myConn.ValidateExistingUser(authentiatedUserQuery);
 
             if (idUser == null)
+            {
+                Log.Error(string.Format("Usuário não encontrado nos registros: {0}", username));
                 return new { message = "Não foi possível encontrar o usuário" };
+            }
+                
 
             var query = string.Format("SELECT * FROM operations WHERE operations.IDUser = '{0}' " +
                 "AND operations.Period = '{1}'", idUser.Result, period);
             var listInfos = myConn.ConsultUserDocuments(query);
 
+            Log.Information(string.Format("[HttpGet] GetUserDocuments realizado para o usuário: {0}", username));
             return new
             {
                 Operation = listInfos.Result,
@@ -56,12 +63,17 @@ namespace BackEnd_TCC_ETEC.Controllers
             var idUser = myConn.ValidateExistingUser(authentiatedUserQuery);
 
             if (idUser == null)
+            {
+                Log.Error(string.Format("[HttpGet] Erro ao encontrar o usuário {0}", username));
                 return new { message = "Não foi possível encontrar o usuário" };
+            }
+                
 
             var query = string.Format("SELECT CompleteName, CPF, Period, TeachingInstitution FROM operations WHERE operations.IDUser = '{0}' " +
                 "AND operations.Period = '{1}'", idUser.Result, period);
             var listInfos = myConn.GetUserCard(query);
 
+            Log.Information(string.Format("[HttpGet] GetUserCard Consulta Realizada para o usuário {0}", username));
             return new
             {
                 User = listInfos.Result,
@@ -78,6 +90,7 @@ namespace BackEnd_TCC_ETEC.Controllers
             var myConn = new MySQLConnectionWithValue();
             var listUser =  myConn.GetAllUsers(query);
 
+            Log.Information("[HttpGet] GetAllUsers executado com sucesso.");
             return new
             {
                 User = listUser.Result,

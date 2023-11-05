@@ -3,6 +3,7 @@ using BackEndAplication.Models;
 using MySql.Data.MySqlClient;
 using System.Collections;
 using System.Collections.Generic;
+using Serilog;
 
 namespace BackEndAplication.Data
 {
@@ -26,6 +27,7 @@ namespace BackEndAplication.Data
                 try
                 {
                     mConn.Open();
+                    Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
                     await using (MySqlCommand commandExecution = new MySqlCommand(query, mConn))
                     {
                         using (MySqlDataReader reader = commandExecution.ExecuteReader())
@@ -42,10 +44,21 @@ namespace BackEndAplication.Data
                         }
                     }
                     var result = list[0].UserName;
-                    return result.ToString();
+                    if (string.IsNullOrEmpty(result))
+                    {
+                        Log.Error(string.Format("[Consulta ao MySql] Falha na consulta do banco de dados.. Nenhum Retorno para a consulta: ({0})", query));
+                        return result.ToString();
+                    }
+                    else
+                    {
+                        Log.Information("[Consulta ao MySql] Encontrado resultado com sucesso.");
+                        return result.ToString();
+                    }
+                    
                 }
                 catch (Exception)
                 {
+                    Log.Error(string.Format("[Consulta ao MySql] Erro ao realizar consulta ({0})", query));
                     return "";
                 }
                 finally
@@ -55,6 +68,7 @@ namespace BackEndAplication.Data
             }
             catch (Exception)
             {
+                Log.Error(string.Format("[Consulta ao MySql] Erro ao realizar consulta ({0})", query));
                 return "";
             }
         }
@@ -72,6 +86,7 @@ namespace BackEndAplication.Data
                 try
                 {
                     mConn.Open();
+                    Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
                     await using (MySqlCommand commandExecution = new MySqlCommand(query, mConn))
                     {
                         using (MySqlDataReader reader = commandExecution.ExecuteReader())
@@ -86,28 +101,33 @@ namespace BackEndAplication.Data
                             }
                         }
                     }
-                    var result = list[0].Id;
-                    if (result == 0)
+                    var lenghtList = list.Count;
+                    if (lenghtList == 0)
                     {
-                        return null;
+                        Log.Error(string.Format("[Consulta ao MySql] Nenhum resultado encontrado na query: ({0})", query));
+                        return "userNotFound";
                     }
                     else
                     {
+                        Log.Information("[Consulta ao MySql] Encontrado resultado com sucesso.");
+                        var result = list[0].Id;
                         return result.ToString();
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    return "";
+                    Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
+                    return "DatabaseFailure";
                 }
                 finally
                 {
                     mConn.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return "";
+                Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
+                return "DatabaseFailure";
             }
         }
 
@@ -124,6 +144,7 @@ namespace BackEndAplication.Data
                 try
                 {
                     mConn.Open();
+                    Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
                     await using (MySqlCommand commandExecution = new MySqlCommand(query, mConn))
                     {
                         using (MySqlDataReader reader = commandExecution.ExecuteReader())
@@ -141,15 +162,18 @@ namespace BackEndAplication.Data
                     var result = list[0].Period;
                     if (string.IsNullOrEmpty(result))
                     {
+                        Log.Error(string.Format("[Consulta ao MySql] Nenhum resultado encotrado para a query {0}", query));
                         return "";
                     }
                     else
                     {
+                        Log.Information("[Consulta ao MySql] Resultado encontrado com sucesso.");
                         return result.ToString();
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
                     return "";
                 }
                 finally
@@ -157,8 +181,9 @@ namespace BackEndAplication.Data
                     mConn.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
                 return "";
             }
         }
@@ -175,6 +200,7 @@ namespace BackEndAplication.Data
             try
             {
                 mConn.Open();
+                Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
                 await using (MySqlCommand commandExecution = new MySqlCommand(query, mConn))
                 {
                     using (MySqlDataReader reader = commandExecution.ExecuteReader())
@@ -195,16 +221,19 @@ namespace BackEndAplication.Data
 
                 if (user == username && pass == Password)
                 {
+                    Log.Information("[Consulta ao MySql] Feita a validação de usuário e senha com sucesso.");
                     return true;
                 }
                 else
                 {
+                    Log.Error("[Consulta ao MySql] Usuário e senha reprovados na verificação com o banco de dados.");
                     return false;
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
+                Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
                 return false;
             }
             finally
@@ -226,6 +255,7 @@ namespace BackEndAplication.Data
                 try
                 {
                     mConn.Open();
+                    Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
                     await using (MySqlCommand commandExecution = new MySqlCommand(query, mConn))
                     {
                         using (MySqlDataReader reader = commandExecution.ExecuteReader())
@@ -243,9 +273,18 @@ namespace BackEndAplication.Data
                             }
                         }
                     }
-                    return list;
+                    if (string.IsNullOrEmpty(list.ToString()))
+                    {
+                        Log.Error(string.Format("[Consulta ao MySql] Nenhum resultado encontrado para a Consulta {0}", query));
+                        return list;
+                    }
+                    else
+                    {
+                        Log.Information("[Consulta ao MySql] Consulta Realizada com sucesso.");
+                        return list;
+                    }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     list.Clear();
                     Users userModel;
@@ -257,6 +296,7 @@ namespace BackEndAplication.Data
 
                     list.Add(userModel);
 
+                    Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
                     return list;
                 }
                 finally
@@ -264,7 +304,7 @@ namespace BackEndAplication.Data
                     mConn.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var list = new List<Users>();
                 Users userModel;
@@ -276,6 +316,7 @@ namespace BackEndAplication.Data
 
                 list.Add(userModel);
 
+                Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
                 return list;
             }
         }
@@ -293,6 +334,7 @@ namespace BackEndAplication.Data
                 try
                 {
                     mConn.Open();
+                    Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
                     await using (MySqlCommand commandExecution = new MySqlCommand(query, mConn))
                     {
                         using (MySqlDataReader reader = commandExecution.ExecuteReader())
@@ -317,9 +359,19 @@ namespace BackEndAplication.Data
                             }
                         }
                     }
-                    return list;
+                    if(list.Count > 0)
+                    {
+                        Log.Information("[Consulta ao MySql] Sucesso ao Realizar consulta ao MySql.");
+                        return list;
+                    }
+                    else
+                    {
+                        Log.Error(string.Format("[Consulta ao MySql] Falha ao realizar consulta para a query ({0})", query));
+                        return list;
+                    }
+                    
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     list.Clear();
                     BigDataModel userModel;
@@ -338,6 +390,7 @@ namespace BackEndAplication.Data
 
                     list.Add(userModel);
 
+                    Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
                     return list;
                 }
                 finally
@@ -345,7 +398,7 @@ namespace BackEndAplication.Data
                     mConn.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var list = new List<BigDataModel>();
                 BigDataModel userModel;
@@ -364,6 +417,7 @@ namespace BackEndAplication.Data
 
                 list.Add(userModel);
 
+                Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
                 return list;
             }
         }
@@ -381,6 +435,7 @@ namespace BackEndAplication.Data
                 try
                 {
                     mConn.Open();
+                    Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
                     await using (MySqlCommand commandExecution = new MySqlCommand(query, mConn))
                     {
                         using (MySqlDataReader reader = commandExecution.ExecuteReader())
@@ -398,9 +453,18 @@ namespace BackEndAplication.Data
                             }
                         }
                     }
-                    return list;
+                    if (list.Count > 0)
+                    {
+                        Log.Information("[Consulta ao MySql] Sucesso ao Realizar consulta ao MySql.");
+                        return list;
+                    }
+                    else
+                    {
+                        Log.Error(string.Format("[Consulta ao MySql] Falha ao retornar resultado na consulta ({0})", query));
+                        return list;
+                    }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     list.Clear();
                     CardModel cardModel;
@@ -412,6 +476,7 @@ namespace BackEndAplication.Data
 
                     list.Add(cardModel);
 
+                    Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
                     return list;
                 }
                 finally
@@ -419,7 +484,7 @@ namespace BackEndAplication.Data
                     mConn.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var list = new List<CardModel>();
                 CardModel cardModel;
@@ -431,6 +496,7 @@ namespace BackEndAplication.Data
 
                 list.Add(cardModel);
 
+                Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
                 return list;
             }
         }
@@ -448,6 +514,7 @@ namespace BackEndAplication.Data
                 try
                 {
                     mConn.Open();
+                    Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
                     await using (MySqlCommand commandExecution = new MySqlCommand(query, mConn))
                     {
                         using (MySqlDataReader reader = commandExecution.ExecuteReader())
@@ -463,14 +530,26 @@ namespace BackEndAplication.Data
                             }
                         }
                     }
-                    return list;
+                    if (list.Count > 0)
+                    {
+                        Log.Information("[Consulta ao MySql] Sucesso na consulta ao MySql");
+                        return list;
+                    }
+                    else
+                    {
+                        Log.Error(string.Format("[Consulta ao MySql] Falha ao retornar resultado para a consulta {0}", query));
+                        return list;
+                    }
+                    
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {                    
                     list.Clear();
                     var userModel = new UserVerificarionModelReturnUsers();
                     userModel.UserName = "";
                     list.Add(userModel);
+
+                    Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
                     return list;
                 }
                 finally
@@ -478,12 +557,14 @@ namespace BackEndAplication.Data
                     mConn.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var list = new List<UserVerificarionModelReturnUsers>();              
                 var userModel = new UserVerificarionModelReturnUsers();
                 userModel.UserName = "";
                 list.Add(userModel);
+
+                Log.Error(string.Format("[Consulta ao MySql] Falha ao executar consulta ({0}), erro: {1}", query, ex.Message));
                 return list;
             }
         }
