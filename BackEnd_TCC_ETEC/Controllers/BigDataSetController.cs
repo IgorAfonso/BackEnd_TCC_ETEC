@@ -12,11 +12,11 @@ namespace BackEndAplication.Controllers
         [HttpPost]
         [Route("importData")]
         [Authorize]
-        public async Task<ActionResult<dynamic>> ImportDataSet([FromBody] bigDataModel model)
+        public async Task<ActionResult<dynamic>> ImportDataSet([FromQuery] UserVerificationModel userModel, [FromBody] bigDataModel model)
         {
             var insertService = new ImportBigDataService();
 
-            if (model.user.Length > 50) return BadRequest("Campo de usuário não pode ter mais que 50 caracteres");
+            if (userModel.UserName.Length > 50) return BadRequest("Campo de usuário não pode ter mais que 50 caracteres");
             if (model.CompleteName.Length > 100) return BadRequest("Campo de CompleteName não pode ter mais que 100 caracteres");
             if (model.BornDate.Length > 10) return BadRequest("Campo de BornDate não pode ter mais que 10 caracteres");
             if (model.CPF.Length > 15) return BadRequest("Campo de CPF não pode ter mais que 15 caracteres");
@@ -30,7 +30,7 @@ namespace BackEndAplication.Controllers
             if (model.CityTeachingInstitution.Length > 100) return BadRequest("Campo de CityTeachingInstitution não pode ter mais que 100 caracteres");
             if (model.Period.Length > 50) return BadRequest("Campo de Period não pode ter mais que 50 caracteres");
 
-            var response = await insertService.InsertBigDataOnDataBase(model.user, model.CompleteName, model.BornDate,
+            var response = await insertService.InsertBigDataOnDataBase(userModel.UserName, model.CompleteName, model.BornDate,
                 model.CPF, model.RG, model.Adress, model.Number, model.Neighborhood, model.TeachingInstitution,
                 model.HaveBF, model.HaveCadUniq, model.CityTeachingInstitution, model.Period);
 
@@ -39,18 +39,18 @@ namespace BackEndAplication.Controllers
 
             if (response == "UserNotFound")
             {
-                Log.Error(string.Format("[HttpPost] Usuário não encontrado ({0}) com uma conta criada.", model.user));
-                return BadRequest(string.Format("{0} Usuário não encontrado ({1}) com uma conta criada.", failResponse, model.user));
+                Log.Error(string.Format("[HttpPost] Usuário não encontrado ({0}) com uma conta criada.", userModel.UserName));
+                return BadRequest(string.Format("{0} Usuário não encontrado ({1}) com uma conta criada.", failResponse, userModel.UserName));
             }
             else if(response == "PeriodExists")
             {
                 Log.Error(string.Format("[HttpPost] Falha na inserção de documentos para o usuário: {0} no mês {1} (Mês já existe para este usuário)",
-                    model.user, model.Period));
+                    userModel.UserName, model.Period));
                 return BadRequest(string.Format("{0} mês com documentos já existentes para este usuário.", failResponse));
             }
             else if(response == "DatabaseFailure")
             {
-                Log.Error(string.Format("[HttpPost] Falha com o banco de dados {0} para o usuário {1}", response, model.user));
+                Log.Error(string.Format("[HttpPost] Falha com o banco de dados {0} para o usuário {1}", response, userModel.UserName));
                 return "Falha ao inserir dados no banco de dados.";
             }
             else if(response == "Sucssess")

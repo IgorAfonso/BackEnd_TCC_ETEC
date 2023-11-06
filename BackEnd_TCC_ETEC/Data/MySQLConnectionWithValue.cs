@@ -568,5 +568,39 @@ namespace BackEndAplication.Data
                 return list;
             }
         }
+
+        public async Task<DateTime> GetSimpleInformation(string query)
+        {
+            string connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
+                _server, _dataBaseSchema, user, password);
+
+            var mConn = new MySqlConnection(connectionString);
+
+            var result = "";
+
+            mConn.Open();
+            Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
+            await using (MySqlCommand commandExecution = new MySqlCommand(query, mConn))
+            {
+                using (MySqlDataReader reader = commandExecution.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result = reader.GetString(0);
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(result))
+            {
+                Log.Error(string.Format("[Consulta ao MySql] Não foi encontrado resultado para a query ({0})", query));
+                return Convert.ToDateTime(result);
+            }
+            else
+            {
+                Log.Information("[Consulta ao MySql] Consulta executada com sucesso.");
+                return Convert.ToDateTime(result);
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using BackEndAplication.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using System.Globalization;
 
 namespace BackEnd_TCC_ETEC.Controllers
 {
@@ -19,10 +20,20 @@ namespace BackEnd_TCC_ETEC.Controllers
 
             var listInfos = myConn.ConsultUserAllInformation(query);
 
+            var queryLastPeriod = string.Format("select\r\n\t" +
+                "cast(str_to_date(REPLACE(query.Period, '-', '.'),'%d.%m.%Y') as DATE)finalDate" +
+                " \r\nfrom(\r\n\tselect \r\n\tconcat('01-',operations.Period) Period \r\n\t" +
+                "from operations\r\n\tinner join users on users.ID = operations.IDUser\r\n\t" +
+                "where users.username = '{0}'\r\n) query\r\norder by finalDate desc\r\n", username);
+
+            var lastPeriodunFormated = myConn.GetSimpleInformation(queryLastPeriod).Result;
+            var lastPeriod = lastPeriodunFormated.ToString("MM-yyyy");
+
             Log.Information("[HttpGet] GetUserInformation realizado para o usuário {0}", username);
             return new
             {
                 Usuario = listInfos.Result,
+                lastPeriod,
             };
         }
 

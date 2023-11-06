@@ -2,7 +2,7 @@
 {
     public class bigDataModel
     {
-        public string user { get; set; }
+        //public string user { get; set; }
         public string CompleteName { get; set; }
         public string BornDate { get; set; }
         public string CPF { get; set; }
