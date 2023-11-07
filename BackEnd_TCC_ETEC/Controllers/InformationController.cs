@@ -1,9 +1,11 @@
-﻿using BackEndAplication.Data;
+﻿using BackEnd_TCC_ETEC.Models;
+using BackEndAplication.Data;
 using BackEndAplication.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System.Globalization;
+using System.Text.Json;
 
 namespace BackEnd_TCC_ETEC.Controllers
 {
@@ -85,7 +87,16 @@ namespace BackEnd_TCC_ETEC.Controllers
             var listInfos = myConn.GetUserCard(query);
 
             Log.Information(string.Format("[HttpGet] GetUserCard Consulta Realizada para o usuário {0}", username));
-            return new JsonResult(listInfos.Result);
+            var final = new CardModel
+            {
+                CompleteName = listInfos.Result[0].CompleteName,
+                CPF = listInfos.Result[0].CPF,
+                Period = listInfos.Result[0].Period,
+                Institution = listInfos.Result[0].Institution,
+                FinalValidDate = listInfos.Result[0].FinalValidDate,
+            };
+
+            return final;
         }
 
         [HttpGet]
