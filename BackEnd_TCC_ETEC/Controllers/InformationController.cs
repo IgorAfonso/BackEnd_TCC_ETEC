@@ -51,7 +51,7 @@ namespace BackEnd_TCC_ETEC.Controllers
             if (idUser == null)
             {
                 Log.Error(string.Format("Usuário não encontrado nos registros: {0}", username));
-                return new { message = "Não foi possível encontrar o usuário" };
+                return BadRequest(new { message = "Não foi possível encontrar o usuário" });
             }
                 
 

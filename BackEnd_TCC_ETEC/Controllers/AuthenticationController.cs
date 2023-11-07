@@ -26,10 +26,8 @@ namespace BackEnd_TCC_ETEC.Controllers
             if (string.IsNullOrEmpty(UserDB.ToString()))
             {
                 Log.Error(string.Format("[HttpPost] Usuário {0} não existe nos registros.", model.UserName));
-                return BadRequest("Usuário não existente");
+                return BadRequest( new { Message = "Usuário não existente" });
             }
-                
-
 
             var userAndPass = mConn.TrueUser(query, model.UserName, hashedPassword).Result;
 
@@ -43,7 +41,7 @@ namespace BackEnd_TCC_ETEC.Controllers
             else
             {
                 Log.Error(string.Format("[HttpPost] Usuário ou senha Inválido.{0}", model.UserName));
-                return BadRequest("Usuário ou senha Inválido");
+                return BadRequest(new { Message = "Usuário ou senha Inválido" });
             }
         }
 
