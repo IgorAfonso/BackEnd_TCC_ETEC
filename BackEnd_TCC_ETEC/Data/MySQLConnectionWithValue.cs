@@ -461,6 +461,17 @@ namespace BackEndAplication.Data
                     else
                     {
                         Log.Error(string.Format("[Consulta ao MySql] Falha ao retornar resultado na consulta ({0})", query));
+                        list.Clear();
+                        CardModel cardModel;
+                        cardModel = new CardModel();
+                        cardModel.CompleteName = "";
+                        cardModel.CPF = "";
+                        cardModel.Period = "";
+                        cardModel.Institution = "";
+                        cardModel.FinalValidDate = "";
+
+                        list.Add(cardModel);
+
                         return list;
                     }
                 }
@@ -473,6 +484,7 @@ namespace BackEndAplication.Data
                     cardModel.CPF = "";
                     cardModel.Period = "";
                     cardModel.Institution = "";
+                    cardModel.FinalValidDate = "";
 
                     list.Add(cardModel);
 
@@ -493,6 +505,7 @@ namespace BackEndAplication.Data
                 cardModel.CPF = "";
                 cardModel.Period = "";
                 cardModel.Institution = "";
+                cardModel.FinalValidDate = "";
 
                 list.Add(cardModel);
 

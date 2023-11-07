@@ -10,7 +10,7 @@ namespace BackEndAplication.Services
         public async Task<String> InsertBigDataOnDataBase(string AuthenticatedUser, string CompleteName, 
             string BornDate, string CPF, string RG, string Adress, string Number, string Neighborhood, 
             string TeachingInstitution, string HaveBF, string HaveCadUniq,
-            string CityTeachingInstitution, string Period)
+            string CityTeachingInstitution, string Period, string TermsOfUse, string MonthStudy)
         {
             var dataBaseCon = new MySQLConnectionWithValue();
 
@@ -28,8 +28,8 @@ namespace BackEndAplication.Services
 
             var insertAuthenticatedUserOperations = string.Format("INSERT INTO operations (IDUser, CompleteName, " +
                 "OperationDate, BornDate, CPF, RG, TeachingInstitution,HaveBF, HaveCadUniq, CityTeachingInstitutin, " +
-                "Period) VALUES ({0}, '{1}', '{2}', '{3}', '{4}','{5}', '{6}', '{7}', '{8}', '{9}', '{10}')", idUser.Result, CompleteName,
-                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), BornDate, CPF, RG, TeachingInstitution, HaveBF, HaveCadUniq, CityTeachingInstitution, Period);
+                "Period, TermsOfUse, MonthStudy) VALUES ({0}, '{1}', '{2}', '{3}', '{4}','{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}')", idUser.Result, CompleteName,
+                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), BornDate, CPF, RG, TeachingInstitution, HaveBF, HaveCadUniq, CityTeachingInstitution, Period, TermsOfUse, MonthStudy);
 
             var insertAuthenticatedUserAdress = string.Format("INSERT INTO adress (IDUser, Adress, Number, Neightborhood, Period)" +
                 " VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", idUser.Result, Adress, Number, Neighborhood, Period);

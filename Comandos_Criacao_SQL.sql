@@ -23,7 +23,9 @@ CREATE TABLE operations(
 	HaveBF CHAR(1),
 	HaveCadUniq CHAR(1),
 	CityTeachingInstitutin VARCHAR(100),
-	Period VARCHAR(50) PRIMARY KEY
+	Period VARCHAR(50),
+	TermsOfUse CHAR(1),
+	MonthStudy VARCHAR(50) PRIMARY KEY
 );
 
 SELECT * FROM operations;
