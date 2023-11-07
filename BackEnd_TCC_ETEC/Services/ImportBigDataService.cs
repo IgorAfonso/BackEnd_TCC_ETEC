@@ -20,10 +20,10 @@ namespace BackEndAplication.Services
             if (idUser.Result == "userNotFound")
                 return "UserNotFound";
 
-            var validationPeriod = string.Format("SELECT Period FROM operations WHERE operations.IDUser = {0} ORDER BY operations.OperationDate DESC", idUser.Result);
+            var validationPeriod = string.Format("SELECT MonthStudy FROM operations WHERE operations.IDUser = {0} ORDER BY operations.OperationDate DESC", idUser.Result);
             var periodUser = dataBaseCon.ValidatePeriod(validationPeriod);
 
-            if(periodUser.Result == Period)
+            if(periodUser.Result == MonthStudy)
                 return "PeriodExists";
 
             var insertAuthenticatedUserOperations = string.Format("INSERT INTO operations (IDUser, CompleteName, " +
@@ -31,8 +31,8 @@ namespace BackEndAplication.Services
                 "Period, TermsOfUse, MonthStudy) VALUES ({0}, '{1}', '{2}', '{3}', '{4}','{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}')", idUser.Result, CompleteName,
                 DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), BornDate, CPF, RG, TeachingInstitution, HaveBF, HaveCadUniq, CityTeachingInstitution, Period, TermsOfUse, MonthStudy);
 
-            var insertAuthenticatedUserAdress = string.Format("INSERT INTO adress (IDUser, Adress, Number, Neightborhood, Period)" +
-                " VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", idUser.Result, Adress, Number, Neighborhood, Period);
+            var insertAuthenticatedUserAdress = string.Format("INSERT INTO adress (IDUser, Adress, Number, Neightborhood, MonthStudy)" +
+                " VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", idUser.Result, Adress, Number, Neighborhood, MonthStudy);
 
             try
             {

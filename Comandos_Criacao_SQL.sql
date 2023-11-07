@@ -35,7 +35,8 @@ CREATE TABLE adress(
 	Adress VARCHAR(100),
 	Number VARCHAR(10),
 	Neightborhood VARCHAR(100),
-	Period VARCHAR(50) PRIMARY KEY
+	MonthStudy VARCHAR(50) PRIMARY KEY
 );
+
 
 SELECT * FROM adress;

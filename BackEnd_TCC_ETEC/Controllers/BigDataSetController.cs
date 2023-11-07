@@ -53,7 +53,7 @@ namespace BackEndAplication.Controllers
             else if(response == "PeriodExists")
             {
                 Log.Error(string.Format("[HttpPost] Falha na inserção de documentos para o usuário: {0} no mês {1} (Mês já existe para este usuário)",
-                    userModel.UserName, model.Period));
+                    userModel.UserName, model.MonthStudy));
                 return BadRequest(string.Format("{0} mês com documentos já existentes para este usuário.", failResponse));
             }
             else if(response == "DatabaseFailure")
