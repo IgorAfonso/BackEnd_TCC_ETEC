@@ -12,4 +12,9 @@ namespace BackEndAplication.Models
         [MaxLength(100)]
         public string email { get; set; }
     }
+
+    public class CreateUserId
+    {
+        public int Id { get; set;}
+    }
 }

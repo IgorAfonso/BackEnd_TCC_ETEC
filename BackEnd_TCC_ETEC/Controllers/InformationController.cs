@@ -80,16 +80,12 @@ namespace BackEnd_TCC_ETEC.Controllers
             }
                 
 
-            var query = string.Format("SELECT CompleteName, CPF, Period, TeachingInstitution FROM operations WHERE operations.IDUser = '{0}' " +
-                "AND operations.Period = '{1}'", idUser.Result, period);
+            var query = string.Format("select query.CompleteName,\r\nquery.CPF,\r\nquery.TeachingInstitution, \r\nLAST_DAY(cast(str_to_date(REPLACE(query.Period, '-', '.'),'%d.%m.%Y') as DATE))finalDate\r\nfrom(select \r\noperations.CompleteName,\r\noperations.CPF,\r\noperations.TeachingInstitution,\r\nconcat('01-',operations.Period) Period\r\nfrom operations \r\ninner join users on users.ID = operations.IDUser\r\nwhere users.username = '{0}'\r\nAND operations.Period = '{1}') query\r\norder by finalDate desc",
+                username, period);
             var listInfos = myConn.GetUserCard(query);
 
             Log.Information(string.Format("[HttpGet] GetUserCard Consulta Realizada para o usuário {0}", username));
-            return new
-            {
-                User = listInfos.Result,
-                Validade = "30 Dias"
-            };
+            return new JsonResult(listInfos.Result);
         }
 
         [HttpGet]

@@ -82,7 +82,7 @@ namespace BackEndAplication.Data
 
             try
             {
-                var list = new List<Users>();
+                var list = new List<CreateUserId>();
                 try
                 {
                     mConn.Open();
@@ -91,17 +91,17 @@ namespace BackEndAplication.Data
                     {
                         using (MySqlDataReader reader = commandExecution.ExecuteReader())
                         {
-                            Users userModel;
+                            CreateUserId userModel;
                             while (reader.Read())
                             {
-                                userModel = new Users();
+                                userModel = new CreateUserId();
                                 userModel.Id = int.Parse(reader[0].ToString());
 
                                 list.Add(userModel);
                             }
                         }
                     }
-                    var lenghtList = list.Count;
+                    var lenghtList = list[0].Id;
                     if (lenghtList == 0)
                     {
                         Log.Error(string.Format("[Consulta ao MySql] Nenhum resultado encontrado na query: ({0})", query));
@@ -446,8 +446,8 @@ namespace BackEndAplication.Data
                                 cardModel = new CardModel();
                                 cardModel.CompleteName = reader[0].ToString();
                                 cardModel.CPF = reader[1].ToString();
-                                cardModel.Period = reader[2].ToString();
-                                cardModel.Institution = reader[3].ToString();
+                                cardModel.Institution = reader[2].ToString();
+                                cardModel.FinalValidDate = reader[3].ToString();
 
                                 list.Add(cardModel);
                             }
