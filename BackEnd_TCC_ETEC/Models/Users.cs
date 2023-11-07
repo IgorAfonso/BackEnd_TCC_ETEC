@@ -17,4 +17,12 @@ namespace BackEndAplication.Models
     {
         public int Id { get; set;}
     }
+
+    public class UserGetInformations
+    {
+        public int Id { get; set;}
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string LastPeriod { get; set; }
+    }
 }

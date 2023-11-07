@@ -24,7 +24,7 @@ namespace BackEndAplication.Services
 
             if (string.IsNullOrEmpty(resultQueryForCreate))
             {
-                return "Fala ao criar usuário";
+                return "Falha ao criar usuário";
             }
             else
             {

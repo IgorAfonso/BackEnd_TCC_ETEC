@@ -24,7 +24,7 @@ namespace BackEnd_TCC_ETEC.Controllers
 
             var queryLastPeriod = string.Format("select\r\n\t" +
                 "cast(str_to_date(REPLACE(query.Period, '-', '.'),'%d.%m.%Y') as DATE)finalDate" +
-                " \r\nfrom(\r\n\tselect \r\n\tconcat('01-',operations.Period) Period \r\n\t" +
+                " \r\nfrom(\r\n\tselect \r\n\tconcat('01-',operations.MonthStudy) Period \r\n\t" +
                 "from operations\r\n\tinner join users on users.ID = operations.IDUser\r\n\t" +
                 "where users.username = '{0}'\r\n) query\r\norder by finalDate desc\r\n", username);
 
@@ -32,10 +32,12 @@ namespace BackEnd_TCC_ETEC.Controllers
             var lastPeriod = lastPeriodunFormated.ToString("MM-yyyy");
 
             Log.Information("[HttpGet] GetUserInformation realizado para o usuário {0}", username);
-            return new
+            return new UserGetInformations
             {
-                Usuario = listInfos.Result,
-                lastPeriod,
+                Id = listInfos.Result[0].Id,
+                Username = listInfos.Result[0].Username,
+                Email = listInfos.Result[0].email,
+                LastPeriod = lastPeriod,
             };
         }
 
@@ -56,7 +58,7 @@ namespace BackEnd_TCC_ETEC.Controllers
                 
 
             var query = string.Format("SELECT * FROM operations WHERE operations.IDUser = '{0}' " +
-                "AND operations.Period = '{1}'", idUser.Result, period);
+                "AND operations.MonthStudy = '{1}'", idUser.Result, period);
             var listInfos = myConn.ConsultUserDocuments(query);
 
             Log.Information(string.Format("[HttpGet] GetUserDocuments realizado para o usuário: {0}", username));
@@ -82,7 +84,13 @@ namespace BackEnd_TCC_ETEC.Controllers
             }
                 
 
-            var query = string.Format("select query.CompleteName,\r\nquery.CPF,\r\nquery.TeachingInstitution, \r\nLAST_DAY(cast(str_to_date(REPLACE(query.Period, '-', '.'),'%d.%m.%Y') as DATE))finalDate\r\nfrom(select \r\noperations.CompleteName,\r\noperations.CPF,\r\noperations.TeachingInstitution,\r\nconcat('01-',operations.MonthStudy) Period\r\nfrom operations \r\ninner join users on users.ID = operations.IDUser\r\nwhere users.username = '{0}'\r\nAND operations.MonthStudy = '{1}') query\r\norder by finalDate desc",
+            var query = string.Format("select query.CompleteName,\r\nquery.CPF,\r\nquery.TeachingInstitution, " +
+                "\r\nLAST_DAY(cast(str_to_date(REPLACE(query.Period, '-', '.'),'%d.%m.%Y') as DATE))finalDate" +
+                "\r\nfrom(select \r\noperations.CompleteName,\r\noperations.CPF,\r\n" +
+                "operations.TeachingInstitution,\r\nconcat('01-',operations.MonthStudy) Period\r\n" +
+                "from operations \r\ninner join users on users.ID = operations.IDUser\r\n" +
+                "where users.username = '{0}'\r\nAND operations.MonthStudy = '{1}') query\r\n" +
+                "order by finalDate desc",
                 username, MonthStudy);
             var listInfos = myConn.GetUserCard(query);
 
