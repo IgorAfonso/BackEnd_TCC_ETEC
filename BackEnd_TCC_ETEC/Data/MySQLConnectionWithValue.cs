@@ -447,7 +447,8 @@ namespace BackEndAplication.Data
                                 cardModel.CompleteName = reader[0].ToString();
                                 cardModel.CPF = reader[1].ToString();
                                 cardModel.Institution = reader[2].ToString();
-                                cardModel.FinalValidDate = reader[3].ToString();
+                                cardModel.Period = reader[3].ToString();
+                                cardModel.FinalValidDate = reader[4].ToString();
 
                                 list.Add(cardModel);
                             }
@@ -606,6 +607,7 @@ namespace BackEndAplication.Data
 
             if (string.IsNullOrEmpty(result))
             {
+                result = "2049-12-31";
                 Log.Error(string.Format("[Consulta ao MySql] Não foi encontrado resultado para a query ({0})", query));
                 return Convert.ToDateTime(result);
             }
