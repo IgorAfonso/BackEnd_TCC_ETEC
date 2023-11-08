@@ -25,7 +25,7 @@ CREATE TABLE operations(
 	CityTeachingInstitutin VARCHAR(100),
 	Period VARCHAR(50),
 	TermsOfUse CHAR(1),
-	MonthStudy VARCHAR(50) PRIMARY KEY
+	MonthStudy VARCHAR(50)
 );
 
 SELECT * FROM operations;

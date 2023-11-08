@@ -1,4 +1,6 @@
-﻿using BackEndAplication.Models;
+﻿using BackEnd_TCC_ETEC.Models;
+using BackEndAplication.Data;
+using BackEndAplication.Models;
 using BackEndAplication.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -71,6 +73,26 @@ namespace BackEndAplication.Controllers
             {
                 Log.Error(string.Format("Falha na inserção. Exception {0}", response));
                 return BadRequest(new { Message = string.Format("Falha na inserção de dados no banco. Exception: {0}", response) });
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdateColor")]
+        [Authorize]
+        public async Task<dynamic> UpdateColorTable([FromBody] ColorManager model)
+        {
+            var query = string.Format("UPDATE colors SET colors.ColorOfMonth = '{0}' WHERE colors.FirstDay = '{1}'", model.ColorOfMonth, model.Month);
+
+            var connectionToCreate = new MySQLConnection();
+            var finalResult = connectionToCreate.connectionDataBase(query).ToString();
+
+            if (string.IsNullOrEmpty(finalResult))
+            {
+                return new { Message = "Falha ao atualizar cor." };
+            }
+            else
+            {
+                return new { Message = "Cor alterada com sucesso." };
             }
         }
     }
