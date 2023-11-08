@@ -449,6 +449,7 @@ namespace BackEndAplication.Data
                                 cardModel.Institution = reader[2].ToString();
                                 cardModel.Period = reader[3].ToString();
                                 cardModel.FinalValidDate = reader[4].ToString();
+                                cardModel.ColorMonth = reader[6].ToString();
 
                                 list.Add(cardModel);
                             }
@@ -470,6 +471,7 @@ namespace BackEndAplication.Data
                         cardModel.Period = "";
                         cardModel.Institution = "";
                         cardModel.FinalValidDate = "";
+                        cardModel.ColorMonth = "";
 
                         list.Add(cardModel);
 
@@ -486,6 +488,7 @@ namespace BackEndAplication.Data
                     cardModel.Period = "";
                     cardModel.Institution = "";
                     cardModel.FinalValidDate = "";
+                    cardModel.ColorMonth = "";
 
                     list.Add(cardModel);
 
@@ -507,6 +510,7 @@ namespace BackEndAplication.Data
                 cardModel.Period = "";
                 cardModel.Institution = "";
                 cardModel.FinalValidDate = "";
+                cardModel.ColorMonth = "";
 
                 list.Add(cardModel);
 

@@ -88,13 +88,15 @@ namespace BackEnd_TCC_ETEC.Controllers
             }
                 
 
-            var query = string.Format("select " +
-                "\r\nquery.CompleteName,\r\nquery.CPF, \r\nquery.TeachingInstitution,\r\nquery.Period," +
-                "\r\nLAST_DAY(cast(str_to_date(REPLACE(query.MonthStudy, '-', '.'),'%d.%m.%Y') as DATE))finalDate " +
-                "\r\nfrom(select operations.CompleteName, operations.CPF, operations.TeachingInstitution,\r\noperations.Period, " +
-                "\r\nconcat('01-',operations.MonthStudy) MonthStudy \r\nfrom operations \r\n" +
-                "inner join users on users.ID = operations.IDUser \r\nwhere users.username = '{0}' \r\n" +
-                "AND operations.MonthStudy = '{1}') query \r\norder by finalDate desc",
+            var query = string.Format("select \r\n*,\r\ncolors.ColorOfMonth\r\n" +
+                "from (\r\nselect \r\nquery.CompleteName,\r\nquery.CPF, \r\n" +
+                "query.TeachingInstitution,\r\nquery.Period,\r\nLAST_DAY(cast(str_to_date(REPLACE" +
+                "(query.MonthStudy, '-', '.'),'%d.%m.%Y') as DATE))finalDate\r\nfrom(select \r\n" +
+                "operations.CompleteName, \r\noperations.CPF, \r\noperations.TeachingInstitution,\r\noperations.Period," +
+                "\r\nconcat('01-',operations.MonthStudy) MonthStudy \r\nfrom operations\r\n" +
+                "inner join users on users.ID = operations.IDUser \r\nwhere users.username = '{0}'\r\n" +
+                "AND operations.MonthStudy = '{1}') query\r\norder by finalDate desc) finalQuery\r\n" +
+                "inner join colors on colors.FirstDay = month(finalQuery.finalDate)",
                 username, MonthStudy);
             var listInfos = myConn.GetUserCard(query);
 
@@ -106,6 +108,7 @@ namespace BackEnd_TCC_ETEC.Controllers
                 Period = listInfos.Result[0].Period,
                 Institution = listInfos.Result[0].Institution,
                 FinalValidDate = listInfos.Result[0].FinalValidDate,
+                ColorMonth = listInfos.Result[0].ColorMonth,
             };
 
             return final;

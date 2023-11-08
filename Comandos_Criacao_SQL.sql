@@ -38,5 +38,23 @@ CREATE TABLE adress(
 	MonthStudy VARCHAR(50) PRIMARY KEY
 );
 
+create table colors(
+	FirstDay varchar(10) primary key,
+	ColorOfMonth VARCHAR(50)
+);
 
 SELECT * FROM adress;
+
+select * from colors;
+insert into colors (FirstDay, ColorOfMonth) values ('01', 'Azul');
+insert into colors (FirstDay, ColorOfMonth) values ('02', 'Verde');
+insert into colors (FirstDay, ColorOfMonth) values ('03', 'Vermelho');
+insert into colors (FirstDay, ColorOfMonth) values ('04', 'Amarelo');
+insert into colors (FirstDay, ColorOfMonth) values ('05', 'Rosa');
+insert into colors (FirstDay, ColorOfMonth) values ('06', 'Violeta');
+insert into colors (FirstDay, ColorOfMonth) values ('07', 'Preto');
+insert into colors (FirstDay, ColorOfMonth) values ('08', 'Branco');
+insert into colors (FirstDay, ColorOfMonth) values ('09', 'Cinza');
+insert into colors (FirstDay, ColorOfMonth) values ('10', 'Roxo');
+insert into colors (FirstDay, ColorOfMonth) values ('11', 'Laranja');
+insert into colors (FirstDay, ColorOfMonth) values ('12', 'Dourado');

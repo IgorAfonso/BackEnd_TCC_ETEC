@@ -7,5 +7,6 @@
         public string Period { get; set; }
         public string Institution { get; set; }
         public string FinalValidDate { get; set; }
+        public string ColorMonth { get; set; }
     }
 }
