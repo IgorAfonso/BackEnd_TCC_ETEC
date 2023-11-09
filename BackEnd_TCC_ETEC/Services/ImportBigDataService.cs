@@ -65,11 +65,10 @@ namespace BackEndAplication.Services
             if (idUser.Result == "userNotFound")
                 return "UserNotFound";
 
-            var insertAuthenticatedUserOperations = string.Format("update operations set TeachingInstitution = '{0}' and HaveBF = '{1}' and HaveCadUniq = '{2}' \r\nand CityTeachingInstitutin = '{3}' and Period = '{4}' and TermsOfUse = '{5}' and MonthStudy = '{6}'\r\nwhere IDUser = '{7}'", idUser.Result, CompleteName,
-                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), BornDate, CPF, RG, TeachingInstitution, HaveBF, HaveCadUniq, CityTeachingInstitution, Period, TermsOfUse, MonthStudy);
+            var insertAuthenticatedUserOperations = string.Format("update operations set TeachingInstitution = '{0}' and HaveBF = '{1}' and HaveCadUniq = '{2}' \r\nand CityTeachingInstitutin = '{3}' and Period = '{4}' and TermsOfUse = '{5}' and MonthStudy = '{6}'\r\nwhere IDUser = '{7}'",
+                TeachingInstitution, HaveBF, HaveCadUniq, CityTeachingInstitution, Period, TermsOfUse, MonthStudy, idUser.Result);
 
-            var insertAuthenticatedUserAdress = string.Format("INSERT INTO adress (IDUser, Adress, Number, Neightborhood, MonthStudy)" +
-                " VALUES ({0}, '{1}', '{2}', '{3}', '{4}')", idUser.Result, Adress, Number, Neighborhood, MonthStudy);
+            var insertAuthenticatedUserAdress = string.Format("update adress set Adress = '{0}' and  Number = '{1}' and Neightborhood = '{2}' and MonthStudy = '{3}'\r\nwhere IDUser = '{4}'",  Adress, Number, Neighborhood, MonthStudy, idUser.Result);
 
             try
             {

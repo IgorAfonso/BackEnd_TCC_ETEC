@@ -53,18 +53,18 @@ namespace BackEndAplication.Controllers
                 Log.Error(string.Format("[HttpPost] Usuário não encontrado ({0}) com uma conta criada.", userModel.UserName));
                 return BadRequest(new { Message = string.Format("{0} Usuário não encontrado ({1}) com uma conta criada.", failResponse, userModel.UserName) });
             }
-            else if(response == "PeriodExists")
+            else if (response == "PeriodExists")
             {
                 Log.Error(string.Format("[HttpPost] Falha na inserção de documentos para o usuário: {0} no mês {1} (Mês já existe para este usuário)",
                     userModel.UserName, model.MonthStudy));
-                return BadRequest(new { Message = string.Format("{0} mês com documentos já existentes para este usuário.", failResponse)});
+                return BadRequest(new { Message = string.Format("{0} mês com documentos já existentes para este usuário.", failResponse) });
             }
-            else if(response == "DatabaseFailure")
+            else if (response == "DatabaseFailure")
             {
                 Log.Error(string.Format("[HttpPost] Falha com o banco de dados {0} para o usuário {1}", response, userModel.UserName));
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Falha ao inserir dados no banco de dados." }); 
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Falha ao inserir dados no banco de dados." });
             }
-            else if(response == "Sucssess")
+            else if (response == "Sucssess")
             {
                 Log.Information("Sucesso na inserção");
                 return Ok(new { Message = successResponse });
@@ -74,6 +74,14 @@ namespace BackEndAplication.Controllers
                 Log.Error(string.Format("Falha na inserção. Exception {0}", response));
                 return BadRequest(new { Message = string.Format("Falha na inserção de dados no banco. Exception: {0}", response) });
             }
+        }
+
+        [HttpPut]
+        [Route("updateBigData")]
+        [Authorize]
+        public async Task<dynamic> UpdateBigData([FromQuery] UserVerificationModel userModel, [FromBody] bigDataModel model)
+        {
+
         }
 
         [HttpPut]
