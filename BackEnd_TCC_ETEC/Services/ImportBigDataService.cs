@@ -52,8 +52,7 @@ namespace BackEndAplication.Services
             }
         }
 
-        public async Task<String> UpdateBigDataOnDataBase(string AuthenticatedUser, string CompleteName,
-            string BornDate, string CPF, string RG, string Adress, string Number, string Neighborhood,
+        public async Task<String> UpdateBigDataOnDataBase(string AuthenticatedUser, string Adress, string Number, string Neighborhood,
             string TeachingInstitution, string HaveBF, string HaveCadUniq,
             string CityTeachingInstitution, string Period, string TermsOfUse, string MonthStudy)
         {
@@ -65,10 +64,14 @@ namespace BackEndAplication.Services
             if (idUser.Result == "userNotFound")
                 return "UserNotFound";
 
-            var insertAuthenticatedUserOperations = string.Format("update operations set TeachingInstitution = '{0}' and HaveBF = '{1}' and HaveCadUniq = '{2}' \r\nand CityTeachingInstitutin = '{3}' and Period = '{4}' and TermsOfUse = '{5}' and MonthStudy = '{6}'\r\nwhere IDUser = '{7}'",
+            var insertAuthenticatedUserOperations = string.Format("update operations set TeachingInstitution = '{0}', HaveBF = '{1}'," +
+                "HaveCadUniq = '{2}', CityTeachingInstitutin = '{3}', Period = '{4}',TermsOfUse = '{5}', MonthStudy = '{6}' " +
+                "where IDUser = '{7}' and MonthStudy = '{6}'",
                 TeachingInstitution, HaveBF, HaveCadUniq, CityTeachingInstitution, Period, TermsOfUse, MonthStudy, idUser.Result);
 
-            var insertAuthenticatedUserAdress = string.Format("update adress set Adress = '{0}' and  Number = '{1}' and Neightborhood = '{2}' and MonthStudy = '{3}'\r\nwhere IDUser = '{4}'",  Adress, Number, Neighborhood, MonthStudy, idUser.Result);
+            var insertAuthenticatedUserAdress = string.Format("update adress set Adress = '{0}',  Number = '{1}', " +
+                "Neightborhood = '{2}', MonthStudy = '{3}' where IDUser = '{4}' and MonthStudy = '{3}'",
+                Adress, Number, Neighborhood, MonthStudy, idUser.Result);
 
             try
             {

@@ -107,7 +107,7 @@ namespace BackEnd_TCC_ETEC.Controllers
                 CPF = listInfos.Result[0].CPF,
                 Period = listInfos.Result[0].Period,
                 Institution = listInfos.Result[0].Institution,
-                FinalValidDate = listInfos.Result[0].FinalValidDate,
+                FinalValidDate = DateTime.Parse(listInfos.Result[0].FinalValidDate).ToString("dd/MM/yyyy"),
                 ColorMonth = listInfos.Result[0].ColorMonth,
             };
 

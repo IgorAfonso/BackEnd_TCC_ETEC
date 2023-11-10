@@ -38,4 +38,18 @@
         public string TermsOfUse { get; set; }
         public string MonthStudy { get; set; }
     }
+
+    public class BigDataModelUpdate
+    {
+        public string Adress { get; set; }
+        public string Number { get; set; }
+        public string Neighborhood { get; set; }
+        public string TeachingInstitution { get; set; }
+        public string HaveBF { get; set; }
+        public string HaveCadUniq { get; set; }
+        public string CityTeachingInstitution { get; set; }
+        public string Period { get; set; }
+        public string TermsOfUse { get; set; }
+        public string MonthStudy { get; set; }
+    }
 }
