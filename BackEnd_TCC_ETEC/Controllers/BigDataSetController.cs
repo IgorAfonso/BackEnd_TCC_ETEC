@@ -35,8 +35,8 @@ namespace BackEndAplication.Controllers
             if (model.TermsOfUse != "Y" && model.TermsOfUse != ("N"))
                 return BadRequest("O campo termos de uso deve conter apenas os caracteres 'Y' ou 'N'");
 
-            if (model.Period != "Manhã" && model.Period != "Tarde" && model.Period != "Noite")
-                return BadRequest("Não é permitido valores diferentes do padrão para o campo Period (Manhã, Tarde, Noite)");
+            if (model.Period != "Manhã" && model.Period != "Tarde" && model.Period != "Noite"  && model.Period != "Integral")
+                return BadRequest("Não é permitido valores diferentes do padrão para o campo Period (Manhã, Tarde, Noite ou Integral)");
 
             var insertService = new ImportBigDataService();
 
@@ -94,8 +94,8 @@ namespace BackEndAplication.Controllers
             if (model.TermsOfUse != "Y" && model.TermsOfUse != "N")
                 return BadRequest("O campo termos de uso deve conter apenas os caracteres 'Y' ou 'N'");
 
-            if (model.Period != "Manhã" && model.Period != "Tarde" && model.Period != "Noite")
-                return BadRequest("Não é permitido valores diferentes do padrão para o campo Period (Manhã, Tarde, Noite)");
+            if (model.Period != "Manhã" && model.Period != "Tarde" && model.Period != "Noite" && model.Period != "Integral")
+                return BadRequest("Não é permitido valores diferentes do padrão para o campo Period (Manhã, Tarde, Noite ou Integral)");
 
             var updateService = new ImportBigDataService();
 
