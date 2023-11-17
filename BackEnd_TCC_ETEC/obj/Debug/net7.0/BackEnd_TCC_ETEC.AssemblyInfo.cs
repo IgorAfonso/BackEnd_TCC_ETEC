@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BackEnd_TCC_ETEC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d753905549209359e5f026c4c891dc187fb6484e")]
 [assembly: System.Reflection.AssemblyProductAttribute("BackEnd_TCC_ETEC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BackEnd_TCC_ETEC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

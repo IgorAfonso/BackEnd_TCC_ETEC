@@ -55,14 +55,13 @@ namespace BackEnd_TCC_ETEC.Controllers
             var authentiatedUserQuery = string.Format("SELECT ID FROM users WHERE users.username = '{0}'", username);
             var idUser = myConn.ValidateExistingUser(authentiatedUserQuery);
 
-            if (idUser == null)
+            if (idUser.Result == null)
             {
                 Log.Error(string.Format("Usuário não encontrado nos registros: {0}", username));
                 return BadRequest(new { message = "Não foi possível encontrar o usuário" });
             }
 
-            var query = string.Format("SELECT * FROM operations WHERE operations.IDUser = '{0}' " +
-                "AND operations.MonthStudy = '{1}'", idUser.Result, period);
+            var query = string.Format("SELECT operations.IDUser, operations.CompleteName, operations.OperationDate, operations.BornDate, operations.CPF, operations.RG, adress.Adress, adress.`Number`, adress.Neightborhood, operations.TeachingInstitution, operations.HaveBF, operations.HaveCadUniq, operations.CityTeachingInstitutin, operations.Period, operations.TermsOfUse, operations.MonthStudy FROM operations inner join adress on adress.IDUser = operations.IDUser WHERE operations.IDUser = '{0}' AND operations.MonthStudy = '{1}'", idUser.Result, period);
             var listInfos = myConn.ConsultUserDocuments(query);
 
             Log.Information(string.Format("[HttpGet] GetUserDocuments realizado para o usuário: {0}", username));

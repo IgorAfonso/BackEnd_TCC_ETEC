@@ -349,11 +349,16 @@ namespace BackEndAplication.Data
                                 userModel.BornDate = reader[3].ToString();
                                 userModel.CPF = reader[4].ToString();
                                 userModel.RG = reader[5].ToString();
-                                userModel.TeachingInstitution = reader[6].ToString();
-                                userModel.HaveBF = reader[7].ToString();
-                                userModel.HaveCadUniq = reader[8].ToString();
-                                userModel.CityTeachingInstitution = reader[9].ToString();
-                                userModel.Period = reader[10].ToString();
+                                userModel.Adress = reader[6].ToString();
+                                userModel.Number = reader[7].ToString();
+                                userModel.Neighborhood = reader[8].ToString();
+                                userModel.TeachingInstitution = reader[9].ToString();
+                                userModel.HaveBF = reader[10].ToString();
+                                userModel.HaveCadUniq = reader[11].ToString();
+                                userModel.CityTeachingInstitution = reader[12].ToString();
+                                userModel.Period = reader[13].ToString();
+                                userModel.TermsOfUse = reader[14].ToString();
+                                userModel.MonthStudy = reader[15].ToString();
 
                                 list.Add(userModel);
                             }
