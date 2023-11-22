@@ -35,7 +35,7 @@ CREATE TABLE adress(
 	Adress VARCHAR(100),
 	Number VARCHAR(10),
 	Neightborhood VARCHAR(100),
-	MonthStudy VARCHAR(50) PRIMARY KEY
+	MonthStudy VARCHAR(50)
 );
 
 create table colors(
