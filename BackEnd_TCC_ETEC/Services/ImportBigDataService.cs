@@ -54,7 +54,7 @@ namespace BackEndAplication.Services
 
         public async Task<String> UpdateBigDataOnDataBase(string AuthenticatedUser, string Adress, string Number, string Neighborhood,
             string TeachingInstitution, string HaveBF, string HaveCadUniq,
-            string CityTeachingInstitution, string Period, string TermsOfUse, string MonthStudy)
+            string CityTeachingInstitution, string Period, string MonthStudy)
         {
             var dataBaseCon = new MySQLConnectionWithValue();
 
@@ -65,9 +65,9 @@ namespace BackEndAplication.Services
                 return "UserNotFound";
 
             var insertAuthenticatedUserOperations = string.Format("update operations set TeachingInstitution = '{0}', HaveBF = '{1}'," +
-                "HaveCadUniq = '{2}', CityTeachingInstitutin = '{3}', Period = '{4}',TermsOfUse = '{5}', MonthStudy = '{6}' " +
-                "where IDUser = '{7}' and MonthStudy = '{6}'",
-                TeachingInstitution, HaveBF, HaveCadUniq, CityTeachingInstitution, Period, TermsOfUse, MonthStudy, idUser.Result);
+                "HaveCadUniq = '{2}', CityTeachingInstitutin = '{3}', Period = '{4}', MonthStudy = '{5}' " +
+                "where IDUser = '{6}' and MonthStudy = '{5}'",
+                TeachingInstitution, HaveBF, HaveCadUniq, CityTeachingInstitution, Period, MonthStudy, idUser.Result);
 
             var insertAuthenticatedUserAdress = string.Format("update adress set Adress = '{0}',  Number = '{1}', " +
                 "Neightborhood = '{2}', MonthStudy = '{3}' where IDUser = '{4}' and MonthStudy = '{3}'",
