@@ -3,6 +3,7 @@ using BackEndAplication.Data;
 using BackEndAplication.Models;
 using BackEndAplication.Services;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Crypto.Macs;
 using Serilog;
 
 namespace BackEnd_TCC_ETEC.Controllers
@@ -93,6 +94,9 @@ namespace BackEnd_TCC_ETEC.Controllers
         [Route("/recovery")]
         public async Task<ActionResult<dynamic>> PasswordRecover([FromBody] UserLogin model)
         {
+            var emailSender = new EmailServicecs();
+            var mailResult = emailSender.EnviaMensagemComAnexos("igorhenrique.afonso99@gmail.com", "carteiradigitalestudante@gmail.com", "TESTE", "EMAILFOI");
+
             var hashService = new HashGenerator();
             var hashedPassword = hashService.HashCreator(model.Password);
 
@@ -114,8 +118,8 @@ namespace BackEnd_TCC_ETEC.Controllers
             return new SimplifiedResponseViewModel()
             {
                 Data = DateTime.Now,
-                Mensagem = message
-            };
+                Mensagem = mailResult,
+        };
         }
     }
 }
