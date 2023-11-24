@@ -581,3 +581,7 @@ C:\tcc\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\obj\Debug\net7.0\BackEnd_TCC_ETEC.sourc
 C:\angular\backend-tcc\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\bin\Debug\net7.0\Serilog.dll
 C:\angular\backend-tcc\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\bin\Debug\net7.0\Serilog.Sinks.Console.dll
 C:\angular\backend-tcc\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\bin\Debug\net7.0\Serilog.Sinks.File.dll
+C:\Users\igor.afonso\Desktop\APITCC\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\bin\Debug\net7.0\Serilog.dll
+C:\Users\igor.afonso\Desktop\APITCC\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\bin\Debug\net7.0\Serilog.Sinks.Console.dll
+C:\Users\igor.afonso\Desktop\APITCC\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\bin\Debug\net7.0\Serilog.Sinks.File.dll
+C:\Users\igor.afonso\Desktop\APITCC\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\obj\Debug\net7.0\BackEnd_TCC_ETEC.sourcelink.json
