@@ -6,7 +6,7 @@ namespace BackEnd_TCC_ETEC.Services
     {
         public string GetImageService(string username)
         {
-            var query = string.Format("SELECT ImageEncrypted FROM users WHERE username = '{0}'", username);
+            var query = string.Format("SELECT CardImage FROM users WHERE username = '{0}'", username);
             var myConn = new MySQLConnectionWithValue();
 
             var imageResult = myConn.GetImageString(query);
@@ -16,7 +16,7 @@ namespace BackEnd_TCC_ETEC.Services
 
         public string InsertImageService(string username, string image)
         {
-            var query = string.Format("INSERT INTO users (ImageEncrypted) VALUES ('{0}') WHERE username = '{1}'", image, username);
+            var query = string.Format("update users set CardImage = '{0}' where username = '{1}'", image, username);
             var myConn = new MySQLConnection();
 
             var insertImageResult = myConn.connectionDataBase(query);
@@ -31,7 +31,7 @@ namespace BackEnd_TCC_ETEC.Services
 
         public string UpdateImageService(string username, string image)
         {
-            var query = string.Format("UPDATE users SET ImageEncrypted = '{0}' WHERE username = '{1}'", image, username);
+            var query = string.Format("UPDATE users SET CardImage = '{0}' WHERE username = '{1}'", image, username);
             var myConn = new MySQLConnection();
 
             var insertImageResult = myConn.connectionDataBase(query);

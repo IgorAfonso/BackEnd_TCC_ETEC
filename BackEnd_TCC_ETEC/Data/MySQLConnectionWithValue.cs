@@ -651,7 +651,7 @@ namespace BackEndAplication.Data
 
             if (string.IsNullOrEmpty(result))
             {
-                return "DataBaseNotFound";
+                return string.Empty;
             }
 
             return result;
