@@ -23,18 +23,10 @@ namespace BackEndAplication.Data
             try
             {
                 mConn.Open();
-                try
-                {
-                    MySqlCommand commandExecution = new MySqlCommand(command, mConn);
-                    Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
-                    var result = commandExecution.ExecuteNonQuery().ToString();
-                    return result;
-                }
-                catch (Exception e)
-                {
-                    Log.Error(string.Format("[Consulta ao MySql] Erro ao realizar consulta: {0}", e.Message));
-                    return e.Message;
-                }
+                MySqlCommand commandExecution = new MySqlCommand(command, mConn);
+                Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
+                var result = commandExecution.ExecuteNonQuery().ToString();
+                return result;
             }
             catch (Exception e)
             {

@@ -4,13 +4,10 @@ namespace BackEndAplication.Models
 {
     public class Users
     {
-        public int Id { get; set; }
-        [MaxLength(50)]
-        public string Username { get; set; }
-        [MaxLength(50)]
-        public string Password { get; set; }
-        [MaxLength(100)]
-        public string email { get; set; }
+        public int Id { get; set; } = 0;
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string email { get; set; } = string.Empty;
     }
 
     public class CreateUserId
