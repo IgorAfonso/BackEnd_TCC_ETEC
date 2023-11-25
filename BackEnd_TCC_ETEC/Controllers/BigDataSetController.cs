@@ -88,11 +88,11 @@ namespace BackEndAplication.Controllers
             if (model.HaveCadUniq.Length > 1) return BadRequest("Campo de HaveCadUniq não pode ter mais que 1 caracter");
             if (model.CityTeachingInstitution.Length > 100) return BadRequest("Campo de CityTeachingInstitution não pode ter mais que 100 caracteres");
             if (model.Period.Length > 50) return BadRequest("Campo de Period não pode ter mais que 50 caracteres");
-            if (model.TermsOfUse.Length > 1) return BadRequest("O campo termos de uso não pode conter mais que 1 caracter (Y, N)");
+            //if (model.TermsOfUse.Length > 1) return BadRequest("O campo termos de uso não pode conter mais que 1 caracter (Y, N)");
             if (model.MonthStudy.Length > 50) return BadRequest("O campo MonthStudy não pode conter mais que 50 caracteres");
 
-            if (model.TermsOfUse != "Y" && model.TermsOfUse != "N")
-                return BadRequest("O campo termos de uso deve conter apenas os caracteres 'Y' ou 'N'");
+            //if (model.TermsOfUse != "Y" && model.TermsOfUse != "N")
+            //    return BadRequest("O campo termos de uso deve conter apenas os caracteres 'Y' ou 'N'");
 
             if (model.Period != "Manhã" && model.Period != "Tarde" && model.Period != "Noite" && model.Period != "Integral")
                 return BadRequest("Não é permitido valores diferentes do padrão para o campo Period (Manhã, Tarde, Noite ou Integral)");
@@ -100,7 +100,7 @@ namespace BackEndAplication.Controllers
             var updateService = new ImportBigDataService();
 
             var response = await updateService.UpdateBigDataOnDataBase(userModel.UserName, model.Adress, model.Number, model.Neighborhood, model.TeachingInstitution,
-                model.HaveBF, model.HaveCadUniq, model.CityTeachingInstitution, model.Period, model.TermsOfUse, model.MonthStudy);
+                model.HaveBF, model.HaveCadUniq, model.CityTeachingInstitution, model.Period, model.MonthStudy);
 
             string failResponse = "Falha no Update dos Dados.";
             string successResponse = "Sucesso na Atualização!";

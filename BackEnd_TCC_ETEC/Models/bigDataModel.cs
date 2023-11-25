@@ -49,7 +49,6 @@
         public string HaveCadUniq { get; set; }
         public string CityTeachingInstitution { get; set; }
         public string Period { get; set; }
-        public string TermsOfUse { get; set; }
         public string MonthStudy { get; set; }
     }
 }

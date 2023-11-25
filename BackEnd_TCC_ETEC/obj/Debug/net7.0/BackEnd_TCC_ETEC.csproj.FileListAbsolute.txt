@@ -578,3 +578,6 @@ C:\Users\igor.afonso\Desktop\BackEnd\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\obj\Debug
 C:\Users\igor.afonso\Desktop\BackEnd\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\obj\Debug\net7.0\BackEnd_TCC_ETEC.genruntimeconfig.cache
 C:\Users\igor.afonso\Desktop\BackEnd\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\obj\Debug\net7.0\ref\BackEnd_TCC_ETEC.dll
 C:\tcc\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\obj\Debug\net7.0\BackEnd_TCC_ETEC.sourcelink.json
+C:\angular\backend-tcc\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\bin\Debug\net7.0\Serilog.dll
+C:\angular\backend-tcc\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\bin\Debug\net7.0\Serilog.Sinks.Console.dll
+C:\angular\backend-tcc\BackEnd_TCC_ETEC\BackEnd_TCC_ETEC\bin\Debug\net7.0\Serilog.Sinks.File.dll
