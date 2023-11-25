@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\BackEnd_TCC_ETEC.props" />
-</Project>
