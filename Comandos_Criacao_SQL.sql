@@ -6,7 +6,8 @@ CREATE TABLE users(
 	ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	username VARCHAR(50) NOT NULL,
 	Password VARCHAR(50) NOT NULL,
-	email VARCHAR(100) NOT NULL
+	email VARCHAR(100) NOT null,
+	CardImage BLOB
 );
 
 SELECT * FROM users;
@@ -35,7 +36,7 @@ CREATE TABLE adress(
 	Adress VARCHAR(100),
 	Number VARCHAR(10),
 	Neightborhood VARCHAR(100),
-	MonthStudy VARCHAR(50) PRIMARY KEY
+	MonthStudy VARCHAR(50)
 );
 
 create table colors(

@@ -626,5 +626,35 @@ namespace BackEndAplication.Data
                 return Convert.ToDateTime(result);
             }
         }
+
+        public async Task<String> GetImageString(string query)
+        {
+            string connectionString = string.Format("server={0};database={1};uid={2};pwd={3}",
+                _server, _dataBaseSchema, user, password);
+
+            var mConn = new MySqlConnection(connectionString);
+
+            var result = "";
+
+            mConn.Open();
+            Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
+            await using (MySqlCommand commandExecution = new MySqlCommand(query, mConn))
+            {
+                using (MySqlDataReader reader = commandExecution.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result = reader.GetString(0);
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(result))
+            {
+                return string.Empty;
+            }
+
+            return result;
+        }
     }
 }
