@@ -361,7 +361,7 @@ namespace BackEndAplication.Data
                             cardModel.Period = reader[3].ToString() ?? string.Empty;
                             cardModel.FinalValidDate = string.IsNullOrEmpty(reader[4].ToString()) ? string.Empty : DateTime.Parse(reader[4].ToString()).ToString("dd/MM/yyyy");
                             cardModel.ColorMonth = reader[6].ToString() ?? string.Empty;
-                            cardModel.CardImage = encrypt.ObjToByte(reader[5]);
+                            cardModel.CardImage = reader[5].ToString() ?? string.Empty;
 
                             list.Add(cardModel);
                         }
