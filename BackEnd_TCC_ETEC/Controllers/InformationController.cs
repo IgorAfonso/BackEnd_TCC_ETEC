@@ -1,4 +1,5 @@
 ﻿using BackEnd_TCC_ETEC.Models;
+using BackEnd_TCC_ETEC.Services;
 using BackEndAplication.Data;
 using BackEndAplication.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -85,17 +86,8 @@ namespace BackEnd_TCC_ETEC.Controllers
                 Log.Error(string.Format("[HttpGet] Erro ao encontrar o usuário {0}", username));
                 return new { message = "Não foi possível encontrar o usuário" };
             }
-                
 
-            var query = string.Format("select \r\n*,\r\ncolors.ColorOfMonth\r\n" +
-                "from (\r\nselect \r\nquery.CompleteName,\r\nquery.CPF, \r\n" +
-                "query.TeachingInstitution,\r\nquery.Period,\r\nLAST_DAY(cast(str_to_date(REPLACE" +
-                "(query.MonthStudy, '-', '.'),'%d.%m.%Y') as DATE))finalDate\r\nfrom(select \r\n" +
-                "operations.CompleteName, \r\noperations.CPF, \r\noperations.TeachingInstitution,\r\noperations.Period," +
-                "\r\nconcat('01-',operations.MonthStudy) MonthStudy \r\nfrom operations\r\n" +
-                "inner join users on users.ID = operations.IDUser \r\nwhere users.username = '{0}'\r\n" +
-                "AND operations.MonthStudy = '{1}') query\r\norder by finalDate desc) finalQuery\r\n" +
-                "inner join colors on colors.FirstDay = month(finalQuery.finalDate)",
+            var query = string.Format("select\r\nfinalQuery.*,\r\ncolors.ColorOfMonth\r\nfrom \r\n(select \r\nquery.CompleteName,\r\nquery.CPF,\r\nquery.TeachingInstitution,\r\nquery.Period,\r\nLAST_DAY(cast(str_to_date(REPLACE\r\n(query.MonthStudy, '-', '.'),'%d.%m.%Y') as DATE))finalDate,\r\nquery.CardImage\r\nfrom (\r\nselect\r\noperations.CompleteName, operations.CPF, operations.TeachingInstitution,operations.Period,\r\nconcat('01-',operations.MonthStudy) MonthStudy, users.CardImage from operations\r\ninner join users on users.ID = operations.IDUser where users.username = '{0}'\r\nAND operations.MonthStudy = '{1}') query\r\norder by finalDate desc) finalQuery\r\ninner join colors on colors.FirstDay = month(finalQuery.finalDate)",
                 username, MonthStudy);
             var listInfos = myConn.GetUserCard(query);
 
@@ -106,8 +98,9 @@ namespace BackEnd_TCC_ETEC.Controllers
                 CPF = listInfos.Result[0].CPF,
                 Period = listInfos.Result[0].Period,
                 Institution = listInfos.Result[0].Institution,
-                FinalValidDate = DateTime.Parse(listInfos.Result[0].FinalValidDate).ToString("dd/MM/yyyy"),
+                FinalValidDate = listInfos.Result[0].FinalValidDate,
                 ColorMonth = listInfos.Result[0].ColorMonth,
+                CardImage = listInfos.Result[0].CardImage != "" ? listInfos.Result[0].CardImage : ""
             };
 
             return final;

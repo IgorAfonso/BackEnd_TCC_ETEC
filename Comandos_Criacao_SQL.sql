@@ -7,7 +7,7 @@ CREATE TABLE users(
 	username VARCHAR(50) NOT NULL,
 	Password VARCHAR(50) NOT NULL,
 	email VARCHAR(100) NOT null,
-	CardImage BLOB
+	CardImage LONGBLOB
 );
 
 SELECT * FROM users;

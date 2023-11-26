@@ -8,5 +8,6 @@
         public string Institution { get; set; } = string.Empty;
         public string FinalValidDate { get; set; } = string.Empty;
         public string ColorMonth { get; set; } = string.Empty;
+        public string CardImage { get; set; } = string.Empty;
     }
 }

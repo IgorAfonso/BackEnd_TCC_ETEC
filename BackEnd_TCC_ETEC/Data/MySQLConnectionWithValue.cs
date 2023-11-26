@@ -1,7 +1,11 @@
 ﻿using BackEnd_TCC_ETEC.Models;
+using BackEnd_TCC_ETEC.Services;
 using BackEndAplication.Models;
 using MySql.Data.MySqlClient;
 using Serilog;
+using System.Collections;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 
 namespace BackEndAplication.Data
 {
@@ -342,6 +346,7 @@ namespace BackEndAplication.Data
             {
                 mConn.Open();
                 Log.Information("[Consulta ao MySql] Executando consulta no banco de dados MySQL.");
+                var encrypt = new EncryptService();
                 await using (MySqlCommand commandExecution = new MySqlCommand(query, mConn))
                 {
                     using (MySqlDataReader reader = commandExecution.ExecuteReader())
@@ -354,8 +359,9 @@ namespace BackEndAplication.Data
                             cardModel.CPF = reader[1].ToString() ?? string.Empty;
                             cardModel.Institution = reader[2].ToString() ?? string.Empty;
                             cardModel.Period = reader[3].ToString() ?? string.Empty;
-                            cardModel.FinalValidDate = reader[4].ToString() ?? string.Empty;
+                            cardModel.FinalValidDate = string.IsNullOrEmpty(reader[4].ToString()) ? string.Empty : DateTime.Parse(reader[4].ToString()).ToString("dd/MM/yyyy");
                             cardModel.ColorMonth = reader[6].ToString() ?? string.Empty;
+                            cardModel.CardImage = encrypt.ObjToByte(reader[5]);
 
                             list.Add(cardModel);
                         }
@@ -488,6 +494,8 @@ namespace BackEndAplication.Data
                 mConn.Close();
             }
         }
+
+        
 
         public async Task<String> GetImageString(string query)
         {
