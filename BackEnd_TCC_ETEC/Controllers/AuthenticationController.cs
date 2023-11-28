@@ -2,6 +2,7 @@
 using BackEndAplication.Data;
 using BackEndAplication.Models;
 using BackEndAplication.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -116,6 +117,30 @@ namespace BackEnd_TCC_ETEC.Controllers
                 Data = DateTime.Now,
                 Mensagem = message
             };
+        }
+
+        [HttpDelete]
+        [Route("/deleteUser")]
+        [Authorize]
+        public IActionResult DeleteUser([FromQuery] UserVerificationModel model)
+        {
+            var conn = new MySQLConnectionWithValue();
+            var authentiatedUserQuery = string.Format("SELECT ID FROM users WHERE users.username = '{0}'", model.UserName);
+            var validation = conn.ValidateExistingUser(authentiatedUserQuery);
+
+            if (validation.Result == null || validation.Result == "DatabaseFailure")
+            {
+                Log.Error(string.Format("Usuário não encontrado nos registros: {0}", model.UserName));
+                return BadRequest(new { message = "Não foi possível encontrar o usuário" });
+            }
+
+            var deleteService = new DeleteUserService();
+            var deleteServiceExecution = deleteService.DeleteUser(validation.Result);
+
+            if (deleteServiceExecution == null || deleteServiceExecution == "DatabaseFailure")
+                return BadRequest(new { message = "Falha ao Deletar usuário."});
+
+            return Ok(deleteServiceExecution);
         }
     }
 }
