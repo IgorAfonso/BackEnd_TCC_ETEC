@@ -7,7 +7,7 @@ CREATE TABLE users(
 	username VARCHAR(50) NOT NULL,
 	Password VARCHAR(50) NOT NULL,
 	email VARCHAR(100) NOT null,
-	CardImage TEXT
+	CardImage LONGTEXT
 );
 
 SELECT * FROM users;
@@ -31,6 +31,7 @@ CREATE TABLE operations(
 
 SELECT * FROM operations;
 
+
 CREATE TABLE adress(
 	IDUser INT NOT NULL,
 	Adress VARCHAR(100),
@@ -47,6 +48,7 @@ create table colors(
 SELECT * FROM adress;
 
 select * from colors;
+
 insert into colors (FirstDay, ColorOfMonth) values ('01', 'Azul');
 insert into colors (FirstDay, ColorOfMonth) values ('02', 'Verde');
 insert into colors (FirstDay, ColorOfMonth) values ('03', 'Vermelho');
