@@ -291,7 +291,7 @@ namespace BackEndAplication.Data
                             userModel.user = reader[0].ToString() ?? string.Empty;
                             userModel.CompleteName = reader[1].ToString() ?? string.Empty;
                             userModel.OperationDate = reader[2].ToString() ?? string.Empty;
-                            userModel.BornDate = reader[3].ToString() ?? string.Empty;
+                            userModel.BornDate = reader[3] is null ? string.Empty : DateTime.Parse(reader[3].ToString()).ToString("yyyy-MM-dd");
                             userModel.CPF = reader[4].ToString() ?? string.Empty;
                             userModel.RG = reader[5].ToString() ?? string.Empty;
                             userModel.Adress = reader[6].ToString() ?? string.Empty;

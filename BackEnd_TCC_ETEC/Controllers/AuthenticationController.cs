@@ -119,6 +119,7 @@ namespace BackEnd_TCC_ETEC.Controllers
             };
         }
 
+        // EndPoint para deletar usuário
         [HttpDelete]
         [Route("/deleteUser")]
         [Authorize]
@@ -140,7 +141,7 @@ namespace BackEnd_TCC_ETEC.Controllers
             if (deleteServiceExecution == null || deleteServiceExecution == "DatabaseFailure")
                 return BadRequest(new { message = "Falha ao Deletar usuário."});
 
-            return Ok(deleteServiceExecution);
+            return Ok(new { message = deleteServiceExecution});
         }
     }
 }

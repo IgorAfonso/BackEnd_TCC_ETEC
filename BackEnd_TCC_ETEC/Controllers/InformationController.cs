@@ -68,7 +68,7 @@ namespace BackEnd_TCC_ETEC.Controllers
             Log.Information(string.Format("[HttpGet] GetUserDocuments realizado para o usuário: {0}", username));
             return new
             {
-                Operation = listInfos.Result,
+                operations = listInfos.Result,
             };
         }
 
